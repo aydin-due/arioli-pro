@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, Response, jsonify, url_for, redirect
 import database as db
+from models.product import Product
 from models.user import User
 
 db = db.dbConnection()
@@ -7,7 +8,8 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
-    return render_template('index.html')
+    products = db['products'].find()
+    return render_template('index2.html', products=products)
 
 @app.route('/products', methods=['POST'])
 def addProduct():
