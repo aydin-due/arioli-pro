@@ -9,44 +9,9 @@ app = Flask(__name__)
 def home():
     return render_template('index.html')
 
-@app.route('/products', methods=['POST'])
-def addProduct():
-    products = db['products']
-    name = request.form['name']
-    price = request.form['price']
-    quantity = request.form['quantity']
-   
-    if name and price and quantity:
-        product = Product(name, price, quantity)
-        products.insert_one(product.toDBCollection())
-        response = jsonify({
-            'name': name,
-            'price': price,
-            'quantity': quantity
-        })
-        return redirect(url_for('home'))
-    else:
-        return not_found()
-
-@app.route('/delete/<string:product_name>')
-def delete(product_name):
-    products = db['products']
-    products.delete_one({'name': product_name})
-    return redirect(url_for('home'))
-
-@app.route('/update/<string:product_name>', methods=['POST'])
-def update(product_name):
-    products = db['products']
-    name = request.form['name']
-    price = request.form['price']
-    quantity = request.form['quantity']
-   
-    if name and price and quantity:
-        products.update_one({'name': product_name}, {'$set': {'name': name, 'price': price, 'quantity': quantity}})
-        response = jsonify({'message': 'Product ' + product_name + ' updated successfully'})
-        return redirect(url_for('home'))
-    else:
-        return not_found()
+@app.route('/account')
+def account():
+    return render_template('account.html')
 
 @app.errorhandler(404)
 def not_found(error=None):
