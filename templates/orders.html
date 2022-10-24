@@ -4,27 +4,27 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Products - Shalowm Healthy Desserts</title>
-    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
+    <title>Pedido - Shalowm Healthy Desserts</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='bootstrap/css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&amp;display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Amaranth&amp;display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Be+Vietnam+Pro&amp;display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Carattere&amp;display=swap">
-    <link rel="stylesheet" href="../assets/css/Features-Cards-icons.css">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/Features-Cards-icons.css')}}">
 </head>
 
 <body style="background: var(--bs-light);font-family: 'Be Vietnam Pro', sans-serif;color: var(--bs-dark);">
     <nav class="navbar navbar-light navbar-expand-md sticky-top navbar-shrink py-3" id="mainNav" style="background: var(--bs-light);border-style: none;">
-        <div class="container"><a class="navbar-brand d-flex align-items-center" href="index.html"><span style="font-family: Carattere, serif;">Shalowm Healthy Desserts</span></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+        <div class="container"><a class="navbar-brand d-flex align-items-center" href="/"><span style="font-family: Carattere, serif;">Shalowm Healthy Desserts</span></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="navbar-nav mx-auto" style="font-family: 'Be Vietnam Pro', sans-serif;">
-                    <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
-                    <li class="nav-item"><a class="nav-link" href="products.html" style="--bs-light: #f5f6f8;--bs-light-rgb: 245,246,248;">Productos</a></li>
-                    <li class="nav-item"><a class="nav-link" href="products-admin.html" style="--bs-light: #f5f6f8;--bs-light-rgb: 245,246,248;text-align: center;">Productos (admin)</a></li>
-                    <li class="nav-item"><a class="nav-link" href="cart.html">Carrito</a></li>
-                    <li class="nav-item"><a class="nav-link active" href="orders.html">Pedidos</a></li>
-                    <li class="nav-item"><a class="nav-link" href="recipe.html">Recetas</a></li>
-                </ul><a class="btn btn-primary shadow" role="button" href="account.html" style="border-style: none;background: var(--bs-body-color);font-family: 'Be Vietnam Pro', sans-serif;">Mi cuenta</a>
+                    <li class="nav-item"><a class="nav-link" href="/">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/products" style="--bs-light: #f5f6f8;--bs-light-rgb: 245,246,248;">Productos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/products-admin" style="--bs-light: #f5f6f8;--bs-light-rgb: 245,246,248;text-align: center;">Productos (admin)</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/cart">Carrito</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="/orders">Pedidos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/recipe">Recetas</a></li>
+                </ul><a class="btn btn-primary shadow" role="button" href="/account" style="border-style: none;background: var(--bs-body-color);font-family: 'Be Vietnam Pro', sans-serif;">Mi cuenta</a>
             </div>
         </div>
     </nav>
@@ -338,10 +338,10 @@
             </div>
         </div>
     </footer>
-    <script src="../assets/js/jquery.min.js"></script>
-    <script src="../assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="../assets/js/bs-init.js"></script>
-    <script src="../assets/js/bold-and-bright.js"></script>
+    <script src="{{url_for('static', filename='js/jquery.min.js')}}"></script>
+    <script src="{{url_for('static', filename='bootstrap/js/bootstrap.min.js')}}/"></script>
+    <script src="{{url_for('static', filename='js/bs-init.js')}}"></script>
+    <script src="{{url_for('static', filename='js/bold-and-bright.js')}}/"></script>
 </body>
 
 </html>

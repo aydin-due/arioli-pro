@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Log in - Shalowm Healthy Desserts</title>
+    <title>Cuenta - Shalowm Healthy Desserts</title>
     <link rel="stylesheet" href="{{url_for('static', filename='bootstrap/css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&amp;display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Amaranth&amp;display=swap">
@@ -18,12 +18,12 @@
         <div class="container"><a class="navbar-brand d-flex align-items-center" href="/"><span style="font-family: Carattere, serif;">Shalowm Healthy Desserts</span></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="navbar-nav mx-auto" style="font-family: 'Be Vietnam Pro', sans-serif;">
-                    <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
-                    <li class="nav-item"><a class="nav-link" href="products.html" style="--bs-light: #f5f6f8;--bs-light-rgb: 245,246,248;">Productos</a></li>
-                    <li class="nav-item"><a class="nav-link" href="products-admin.html" style="--bs-light: #f5f6f8;--bs-light-rgb: 245,246,248;text-align: center;">Productos (admin)</a></li>
-                    <li class="nav-item"><a class="nav-link" href="cart.html">Carrito</a></li>
-                    <li class="nav-item"><a class="nav-link" href="orders.html">Pedidos</a></li>
-                    <li class="nav-item"><a class="nav-link" href="recipe.html">Recetas</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/products" style="--bs-light: #f5f6f8;--bs-light-rgb: 245,246,248;">Productos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/products-admin" style="--bs-light: #f5f6f8;--bs-light-rgb: 245,246,248;text-align: center;">Productos (admin)</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/cart">Carrito</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/orders">Pedidos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/recipe">Recetas</a></li>
                 </ul><a class="btn btn-primary shadow" role="button" href="/account" style="border-style: none;background: var(--bs-body-color);font-family: 'Be Vietnam Pro', sans-serif;">Mi cuenta</a>
             </div>
         </div>
@@ -44,7 +44,10 @@
                                 <div class="mb-3"></div>
                                 <div class="mb-3"></div>
                                 <div class="mb-3">
-                                    <p style="font-size: 20px;font-family: 'Be Vietnam Pro', sans-serif;">Bienvenido</p><a class="btn btn-primary shadow d-block w-100" role="button" href="login.html" style="background: var(--bs-secondary);border-style: none;font-family: 'Be Vietnam Pro', sans-serif;margin-bottom: 20px;">Iniciar sesión</a><a class="btn btn-primary shadow d-block w-100" role="button" href="register.html" style="background: var(--bs-secondary);border-style: none;font-family: 'Be Vietnam Pro', sans-serif;margin-bottom: 20px;">Registrarme</a><a class="btn btn-primary shadow d-block w-100" role="button" href="#" style="background: var(--bs-secondary);border-style: none;font-family: 'Be Vietnam Pro', sans-serif;">Cerrar sesión</a>
+                                    <p style="font-size: 20px;font-family: 'Be Vietnam Pro', sans-serif;">Bienvenido</p>
+                                    <a class="btn btn-primary shadow d-block w-100" role="button" href="login.html" style="background: var(--bs-secondary);border-style: none;font-family: 'Be Vietnam Pro', sans-serif;margin-bottom: 20px;">Iniciar sesión</a>
+                                    <a class="btn btn-primary shadow d-block w-100" role="button" href="/register" style="background: var(--bs-secondary);border-style: none;font-family: 'Be Vietnam Pro', sans-serif;margin-bottom: 20px;">Registrarme</a>
+                                    <a class="btn btn-primary shadow d-block w-100" role="button" href="#" style="background: var(--bs-secondary);border-style: none;font-family: 'Be Vietnam Pro', sans-serif;">Cerrar sesión</a>
                                 </div>
                             </form>
                         </div>
