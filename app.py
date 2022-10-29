@@ -30,9 +30,23 @@ def add_recipe():
 def cart():
     return render_template('cart.html')
 
-@app.route('/login')
+@app.route('/login', methods=['GET', 'POST'])
 def login():
-    return render_template('login.html')
+    if request.method == 'POST':
+        users = db['users']
+        email = request.form['email']
+        password = request.form['password']
+
+        if email and password:
+            user = users.find_one({"email": email, "password": password})
+            if user:
+                session['username'] = user['username']
+                return redirect(url_for('account'))
+            return render_template('login.html', error='El correo o la contraseña son incorrectos')
+        else:
+            return render_template('login.html', error='Por favor llene todos los campos')
+    else:
+        return render_template('login.html')
 
 @app.route('/orders')
 def orders():
