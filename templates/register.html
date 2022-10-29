@@ -24,7 +24,7 @@
                     <li class="nav-item"><a class="nav-link" href="/cart">Carrito</a></li>
                     <li class="nav-item"><a class="nav-link" href="/orders">Pedidos</a></li>
                     <li class="nav-item"><a class="nav-link" href="/recipe">Recetas</a></li>
-                </ul><a class="btn btn-primary shadow" role="button" href="account" style="border-style: none;background: var(--bs-body-color);font-family: 'Be Vietnam Pro', sans-serif;">Mi cuenta</a>
+                </ul><a class="btn btn-primary shadow" role="button" href="/account" style="border-style: none;background: var(--bs-body-color);font-family: 'Be Vietnam Pro', sans-serif;">Mi cuenta</a>
             </div>
         </div>
     </nav>
@@ -43,12 +43,17 @@
                             <form method="POST">
                                 <div class="mb-3"></div>
                                 <div class="mb-3">
-                                    <input class="form-control" type="text" name="name" placeholder="Nombre" style="margin-bottom: 30px;font-family: 'Be Vietnam Pro', sans-serif;">
                                     <input class="form-control" type="text" name="username" placeholder="Nombre de usuario" style="margin-bottom: 30px;font-family: 'Be Vietnam Pro', sans-serif;">
+                                    <input class="form-control" type="text" name="email" placeholder="Correo electrónico" style="margin-bottom: 30px;font-family: 'Be Vietnam Pro', sans-serif;">
                                     <input class="form-control" type="password" name="password" placeholder="Contraseña" style="margin-bottom: 30px;font-family: 'Be Vietnam Pro', sans-serif;">
                                 </div>
                                 <div class="mb-3">
                                     <button class="btn btn-primary shadow d-block w-100" type="submit" style="background: var(--bs-secondary);border-style: none;font-family: 'Be Vietnam Pro', sans-serif;">Crear cuenta</button>
+                                </div>
+                                {% if error %}
+                                <div class="mb-3">
+                                    <p class="fw-bold text-success mb-2", style="color: #c1292e !important;font-family: 'Be Vietnam Pro', sans-serif;"">{{ error }}</p>
+                                {% endif %}
                                 </div>
                             </form>
                         </div>

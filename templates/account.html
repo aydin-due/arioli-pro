@@ -44,10 +44,14 @@
                                 <div class="mb-3"></div>
                                 <div class="mb-3"></div>
                                 <div class="mb-3">
+                                    {% if user %}
+                                    <p style="font-size: 20px;font-family: 'Be Vietnam Pro', sans-serif;">Bienvenido, {{ user }}</p>
+                                    <a class="btn btn-primary shadow d-block w-100" role="button" href="/logout" style="background: var(--bs-secondary);border-style: none;font-family: 'Be Vietnam Pro', sans-serif;">Cerrar sesión</a>
+                                    {% else %}
                                     <p style="font-size: 20px;font-family: 'Be Vietnam Pro', sans-serif;">Bienvenido</p>
-                                    <a class="btn btn-primary shadow d-block w-100" role="button" href="login.html" style="background: var(--bs-secondary);border-style: none;font-family: 'Be Vietnam Pro', sans-serif;margin-bottom: 20px;">Iniciar sesión</a>
+                                    <a class="btn btn-primary shadow d-block w-100" role="button" href="/login" style="background: var(--bs-secondary);border-style: none;font-family: 'Be Vietnam Pro', sans-serif;margin-bottom: 20px;">Iniciar sesión</a>
                                     <a class="btn btn-primary shadow d-block w-100" role="button" href="/register" style="background: var(--bs-secondary);border-style: none;font-family: 'Be Vietnam Pro', sans-serif;margin-bottom: 20px;">Registrarme</a>
-                                    <a class="btn btn-primary shadow d-block w-100" role="button" href="#" style="background: var(--bs-secondary);border-style: none;font-family: 'Be Vietnam Pro', sans-serif;">Cerrar sesión</a>
+                                    {% endif %}
                                 </div>
                             </form>
                         </div>

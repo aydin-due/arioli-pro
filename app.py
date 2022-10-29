@@ -1,9 +1,11 @@
-from flask import Flask, render_template, request, Response, jsonify, url_for, redirect
+from flask import Flask, render_template, request, Response, jsonify, url_for, redirect, session
 import database as db
+import secrets
 from models.user import User
 
 db = db.dbConnection()
 app = Flask(__name__)
+app.secret_key = secrets.token_hex(16)
 
 @app.route('/')
 def home():
@@ -11,6 +13,9 @@ def home():
 
 @app.route('/account')
 def account():
+    if 'username' in session:
+        user = session['username']
+        return render_template('account.html', user=user)
     return render_template('account.html')
 
 @app.route('/add-product')
@@ -45,25 +50,31 @@ def products():
 def update_product():
     return render_template('update-product.html')
 
-@app.route('/register')
+@app.route('/register', methods=['GET','POST'])
 def register():
-    # users = db['users']
-    # name = request.form['name']
-    # username = request.form['username']
-    # password = request.form['password']
+    if request.method == 'POST':
+        users = db['users']
+        username = request.form['username']
+        email = request.form['email']
+        password = request.form['password']
 
-    # if name and username and password:
-    #     user = User(name, username, password)
-    #     users.insert_one(user.toBDCollection())
-    #     response = jsonify({
-    #         'name': name,
-    #         'username': username,
-    #         'password': password
-    #     })
-    #     return redirect(url_for('home'))
-    # else:
-    #     return not_found()
-    return render_template('register.html')
+        if username and email and password:
+            user = User(username, email, password)
+            if users.find_one({'email': email}):
+                return render_template('register.html', error='El correo ya está en uso')
+            users.insert_one(user.toBDCollection())
+            session['username'] = username
+            return redirect(url_for('account'))
+        else:
+            return render_template('register.html', error='Por favor llene todos los campos')
+    else:
+        return render_template('register.html')
+
+@app.route('/logout') 
+def logout():
+    if 'username' in session:
+        session.pop('username',None)
+        return redirect('/')
 
 @app.errorhandler(404)
 def not_found(error=None):
