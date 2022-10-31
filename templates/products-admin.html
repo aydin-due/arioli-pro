@@ -5,93 +5,86 @@
 {% block title %}Productos{% endblock %}
 
 {% block content %}
-    <div class="container py-5" style="border-radius: 50px;background: var(--bs-light);">
-        <div class="row mb-4 mb-lg-5">
-            <div class="col-md-8 col-xl-6 text-center mx-auto">
-                <h1 style="font-family: Amaranth, sans-serif;color: var(--bs-body-color);">Nuestros Postres</h1>
-                <p style="width: 600px;">Puedes navegar nuestra colección de muffins, brownies y galletas veganas, o también puedes realizar una búsqueda de tu producto preferido.</p>
-            </div>
-        </div>
-        <div class="row mb-4 mb-lg-5" style="text-align: center;">
-            <div class="col d-lg-flex d-xl-flex justify-content-lg-start justify-content-xl-center"><a class="btn btn-primary shadow" role="button" href="add-product.html" style="border-style: none;background: var(--bs-body-color);font-family: 'Be Vietnam Pro', sans-serif;">Agregar productos</a></div>
+<div class="container py-5" style="border-radius: 50px;">
+    <div class="row mb-4 mb-lg-5">
+        <div class="col-md-8 col-xl-6 text-center mx-auto">
+            <h1 style="font-family: Amaranth, sans-serif;color: var(--bs-body-color);">Nuestros Postres</h1>
+            <p style="width: 600px;">Puedes navegar nuestra colección de muffins, brownies y galletas veganas, o también puedes realizar una búsqueda de tu producto preferido.</p>
         </div>
     </div>
-    <div class="container">
-        <div class="row" style="margin-bottom: 100px;">
-            <div class="col">
-                <div class="card">
-                    <div class="card-body" style="padding-top: 100px;"><img class="d-lg-flex" style="border-radius: 50%;width: 150px;height: 150px;box-shadow: 0px 10px 20px 4px var(--bs-gray-500);position: absolute;top: -50px;left: 50%;-webkit-transform: translateX(-50%);transform: translateX(-50%);" src="assets/img/products/1.jpg">
-                        <h4 class="card-title" style="font-family: Amaranth, sans-serif;text-align: center;padding-top: 30px;">Nombre del producto</h4>
-                        <p class="card-text">Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.</p>
-                        <div class="row d-xl-flex justify-content-xl-center">
-                            <div class="col-xl-5 d-xl-flex justify-content-xl-end"><button class="btn btn-primary d-xl-flex" type="button" style="border-style: none;background: var(--bs-danger);">Eliminar</button></div>
-                            <div class="col-xl-5 d-xl-flex justify-content-xl-end"><button class="btn btn-primary d-xl-flex" type="button" style="border-style: none;background: var(--bs-secondary);">Editar</button></div>
-                        </div>
-                    </div>
-                </div>
+    <div class="row mb-4 mb-lg-5" style="text-align: center;">
+        <div class="col-lg-6 col-xl-7 d-lg-flex d-xl-flex justify-content-lg-end justify-content-xl-end"><input class="placeholder border rounded border-1 d-lg-flex justify-content-lg-start align-items-lg-center" type="search" style="background: var(--bs-white);width: 300px;padding: 10px;" placeholder="Nombre del producto"></div>
+        <div class="col d-lg-flex d-xl-flex justify-content-lg-start justify-content-xl-start"><a class="btn btn-primary shadow" role="button" href="signup.html" style="border-style: none;background: var(--bs-body-color);font-family: 'Be Vietnam Pro', sans-serif;">Buscar</a></div>
+    </div>
+    <div class="row mb-4 mb-lg-5" style="text-align: center;">
+        <div class="col d-lg-flex d-xl-flex justify-content-lg-start justify-content-xl-center"><a class="btn btn-primary shadow" role="button" href="add-product.html" style="border-style: none;background: var(--bs-body-color);font-family: 'Be Vietnam Pro', sans-serif;">Agregar productos</a></div>
+    </div>
+</div>
+<div class="container d-xl-flex justify-content-evenly flex-wrap align-items-xl-center">
+    <div class="card" style="width: 350px;margin-bottom: 100px;">
+        <div class="card-body" style="padding-top: 100px;"><img class="d-lg-flex" style="border-radius: 50%;width: 150px;height: 150px;box-shadow: 0px 10px 20px 4px var(--bs-gray-500);position: absolute;top: -50px;left: 50%;-webkit-transform: translateX(-50%);transform: translateX(-50%);" src="assets/img/products/1.jpg">
+            <h4 class="card-title" style="font-family: Amaranth, sans-serif;text-align: center;padding-top: 30px;">Nombre del producto</h4>
+            <p class="card-text">Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.</p>
+            <div class="row d-xl-flex justify-content-xl-center" style="margin-bottom: 20px;">
+                <div class="col-xl-6 d-xl-flex justify-content-xl-end"><button class="btn btn-primary d-xl-flex" type="button" style="border-style: none;background: var(--bs-body-color);font-family: 'Be Vietnam Pro', sans-serif;">Ver receta</button></div>
             </div>
-            <div class="col">
-                <div class="card">
-                    <div class="card-body" style="padding-top: 100px;"><img class="d-lg-flex" style="border-radius: 50%;width: 150px;height: 150px;box-shadow: 0px 10px 20px 4px var(--bs-gray-500);position: absolute;top: -50px;left: 50%;-webkit-transform: translateX(-50%);transform: translateX(-50%);" src="assets/img/products/1.jpg">
-                        <h4 class="card-title" style="font-family: Amaranth, sans-serif;text-align: center;padding-top: 30px;">Nombre del producto</h4>
-                        <p class="card-text">Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.</p>
-                        <div class="row d-xl-flex justify-content-xl-center">
-                            <div class="col-xl-5 d-xl-flex justify-content-xl-end"><button class="btn btn-primary d-xl-flex" type="button" style="border-style: none;background: var(--bs-danger);">Eliminar</button></div>
-                            <div class="col-xl-5 d-xl-flex justify-content-xl-end"><button class="btn btn-primary d-xl-flex" type="button" style="border-style: none;background: var(--bs-secondary);">Editar</button></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card">
-                    <div class="card-body" style="padding-top: 100px;"><img class="d-lg-flex" style="border-radius: 50%;width: 150px;height: 150px;box-shadow: 0px 10px 20px 4px var(--bs-gray-500);position: absolute;top: -50px;left: 50%;-webkit-transform: translateX(-50%);transform: translateX(-50%);" src="assets/img/products/1.jpg">
-                        <h4 class="card-title" style="font-family: Amaranth, sans-serif;text-align: center;padding-top: 30px;">Nombre del producto</h4>
-                        <p class="card-text">Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.</p>
-                        <div class="row d-xl-flex justify-content-xl-center">
-                            <div class="col-xl-5 d-xl-flex justify-content-xl-end"><button class="btn btn-primary d-xl-flex" type="button" style="border-style: none;background: var(--bs-danger);">Eliminar</button></div>
-                            <div class="col-xl-5 d-xl-flex justify-content-xl-end"><button class="btn btn-primary d-xl-flex" type="button" style="border-style: none;background: var(--bs-secondary);">Editar</button></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row" style="margin-bottom: 100px;">
-            <div class="col">
-                <div class="card">
-                    <div class="card-body" style="padding-top: 100px;"><img class="d-lg-flex" style="border-radius: 50%;width: 150px;height: 150px;box-shadow: 0px 10px 20px 4px var(--bs-gray-500);position: absolute;top: -50px;left: 50%;-webkit-transform: translateX(-50%);transform: translateX(-50%);" src="assets/img/products/1.jpg">
-                        <h4 class="card-title" style="font-family: Amaranth, sans-serif;text-align: center;padding-top: 30px;">Nombre del producto</h4>
-                        <p class="card-text">Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.</p>
-                        <div class="row d-xl-flex justify-content-xl-center">
-                            <div class="col-xl-5 d-xl-flex justify-content-xl-end"><button class="btn btn-primary d-xl-flex" type="button" style="border-style: none;background: var(--bs-danger);">Eliminar</button></div>
-                            <div class="col-xl-5 d-xl-flex justify-content-xl-end"><button class="btn btn-primary d-xl-flex" type="button" style="border-style: none;background: var(--bs-secondary);">Editar</button></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card">
-                    <div class="card-body" style="padding-top: 100px;"><img class="d-lg-flex" style="border-radius: 50%;width: 150px;height: 150px;box-shadow: 0px 10px 20px 4px var(--bs-gray-500);position: absolute;top: -50px;left: 50%;-webkit-transform: translateX(-50%);transform: translateX(-50%);" src="assets/img/products/1.jpg">
-                        <h4 class="card-title" style="font-family: Amaranth, sans-serif;text-align: center;padding-top: 30px;">Nombre del producto</h4>
-                        <p class="card-text">Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.</p>
-                        <div class="row d-xl-flex justify-content-xl-center">
-                            <div class="col-xl-5 d-xl-flex justify-content-xl-end"><button class="btn btn-primary d-xl-flex" type="button" style="border-style: none;background: var(--bs-danger);">Eliminar</button></div>
-                            <div class="col-xl-5 d-xl-flex justify-content-xl-end"><button class="btn btn-primary d-xl-flex" type="button" style="border-style: none;background: var(--bs-secondary);">Editar</button></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card">
-                    <div class="card-body" style="padding-top: 100px;"><img class="d-lg-flex" style="border-radius: 50%;width: 150px;height: 150px;box-shadow: 0px 10px 20px 4px var(--bs-gray-500);position: absolute;top: -50px;left: 50%;-webkit-transform: translateX(-50%);transform: translateX(-50%);" src="assets/img/products/1.jpg">
-                        <h4 class="card-title" style="font-family: Amaranth, sans-serif;text-align: center;padding-top: 30px;">Nombre del producto</h4>
-                        <p class="card-text">Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.</p>
-                        <div class="row d-xl-flex justify-content-xl-center">
-                            <div class="col-xl-5 d-xl-flex justify-content-xl-end"><button class="btn btn-primary d-xl-flex" type="button" style="border-style: none;background: var(--bs-danger);">Eliminar</button></div>
-                            <div class="col-xl-5 d-xl-flex justify-content-xl-end"><button class="btn btn-primary d-xl-flex" type="button" style="border-style: none;background: var(--bs-secondary);">Editar</button></div>
-                        </div>
-                    </div>
-                </div>
+            <div class="row d-xl-flex justify-content-xl-center">
+                <div class="col-xl-5 d-xl-flex justify-content-xl-end"><button class="btn btn-primary d-xl-flex" type="button" style="border-style: none;background: var(--bs-danger);font-family: 'Be Vietnam Pro', sans-serif;">Eliminar</button></div>
+                <div class="col-xl-5 d-xl-flex justify-content-xl-end"><button class="btn btn-primary d-xl-flex" type="button" style="border-style: none;background: var(--bs-secondary);font-family: 'Be Vietnam Pro', sans-serif;">Editar</button></div>
             </div>
         </div>
     </div>
+    <div class="card" style="width: 350px;margin-bottom: 100px;">
+        <div class="card-body" style="padding-top: 100px;"><img class="d-lg-flex" style="border-radius: 50%;width: 150px;height: 150px;box-shadow: 0px 10px 20px 4px var(--bs-gray-500);position: absolute;top: -50px;left: 50%;-webkit-transform: translateX(-50%);transform: translateX(-50%);" src="assets/img/products/1.jpg">
+            <h4 class="card-title" style="font-family: Amaranth, sans-serif;text-align: center;padding-top: 30px;">Nombre del producto</h4>
+            <p class="card-text">Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.</p>
+            <div class="row d-xl-flex justify-content-xl-center" style="margin-bottom: 20px;">
+                <div class="col-xl-6 d-xl-flex justify-content-xl-end"><button class="btn btn-primary d-xl-flex" type="button" style="border-style: none;background: var(--bs-body-color);">Ver receta</button></div>
+            </div>
+            <div class="row d-xl-flex justify-content-xl-center">
+                <div class="col-xl-5 d-xl-flex justify-content-xl-end"><button class="btn btn-primary d-xl-flex" type="button" style="border-style: none;background: var(--bs-danger);">Eliminar</button></div>
+                <div class="col-xl-5 d-xl-flex justify-content-xl-end"><button class="btn btn-primary d-xl-flex" type="button" style="border-style: none;background: var(--bs-secondary);">Editar</button></div>
+            </div>
+        </div>
+    </div>
+    <div class="card" style="width: 350px;margin-bottom: 100px;">
+        <div class="card-body" style="padding-top: 100px;"><img class="d-lg-flex" style="border-radius: 50%;width: 150px;height: 150px;box-shadow: 0px 10px 20px 4px var(--bs-gray-500);position: absolute;top: -50px;left: 50%;-webkit-transform: translateX(-50%);transform: translateX(-50%);" src="assets/img/products/1.jpg">
+            <h4 class="card-title" style="font-family: Amaranth, sans-serif;text-align: center;padding-top: 30px;">Nombre del producto</h4>
+            <p class="card-text">Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.</p>
+            <div class="row d-xl-flex justify-content-xl-center" style="margin-bottom: 20px;">
+                <div class="col-xl-6 d-xl-flex justify-content-xl-end"><button class="btn btn-primary d-xl-flex" type="button" style="border-style: none;background: var(--bs-body-color);">Ver receta</button></div>
+            </div>
+            <div class="row d-xl-flex justify-content-xl-center">
+                <div class="col-xl-5 d-xl-flex justify-content-xl-end"><button class="btn btn-primary d-xl-flex" type="button" style="border-style: none;background: var(--bs-danger);">Eliminar</button></div>
+                <div class="col-xl-5 d-xl-flex justify-content-xl-end"><button class="btn btn-primary d-xl-flex" type="button" style="border-style: none;background: var(--bs-secondary);">Editar</button></div>
+            </div>
+        </div>
+    </div>
+    <div class="card" style="width: 350px;margin-bottom: 100px;">
+        <div class="card-body" style="padding-top: 100px;"><img class="d-lg-flex" style="border-radius: 50%;width: 150px;height: 150px;box-shadow: 0px 10px 20px 4px var(--bs-gray-500);position: absolute;top: -50px;left: 50%;-webkit-transform: translateX(-50%);transform: translateX(-50%);" src="assets/img/products/1.jpg">
+            <h4 class="card-title" style="font-family: Amaranth, sans-serif;text-align: center;padding-top: 30px;">Nombre del producto</h4>
+            <p class="card-text">Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.</p>
+            <div class="row d-xl-flex justify-content-xl-center" style="margin-bottom: 20px;">
+                <div class="col-xl-6 d-xl-flex justify-content-xl-end"><button class="btn btn-primary d-xl-flex" type="button" style="border-style: none;background: var(--bs-body-color);">Ver receta</button></div>
+            </div>
+            <div class="row d-xl-flex justify-content-xl-center">
+                <div class="col-xl-5 d-xl-flex justify-content-xl-end"><button class="btn btn-primary d-xl-flex" type="button" style="border-style: none;background: var(--bs-danger);">Eliminar</button></div>
+                <div class="col-xl-5 d-xl-flex justify-content-xl-end"><button class="btn btn-primary d-xl-flex" type="button" style="border-style: none;background: var(--bs-secondary);">Editar</button></div>
+            </div>
+        </div>
+    </div>
+    <div class="card" style="width: 350px;margin-bottom: 100px;">
+        <div class="card-body" style="padding-top: 100px;"><img class="d-lg-flex" style="border-radius: 50%;width: 150px;height: 150px;box-shadow: 0px 10px 20px 4px var(--bs-gray-500);position: absolute;top: -50px;left: 50%;-webkit-transform: translateX(-50%);transform: translateX(-50%);" src="assets/img/products/1.jpg">
+            <h4 class="card-title" style="font-family: Amaranth, sans-serif;text-align: center;padding-top: 30px;">Nombre del producto</h4>
+            <p class="card-text">Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.</p>
+            <div class="row d-xl-flex justify-content-xl-center" style="margin-bottom: 20px;">
+                <div class="col-xl-6 d-xl-flex justify-content-xl-end"><button class="btn btn-primary d-xl-flex" type="button" style="border-style: none;background: var(--bs-body-color);">Ver receta</button></div>
+            </div>
+            <div class="row d-xl-flex justify-content-xl-center">
+                <div class="col-xl-5 d-xl-flex justify-content-xl-end"><button class="btn btn-primary d-xl-flex" type="button" style="border-style: none;background: var(--bs-danger);">Eliminar</button></div>
+                <div class="col-xl-5 d-xl-flex justify-content-xl-end"><button class="btn btn-primary d-xl-flex" type="button" style="border-style: none;background: var(--bs-secondary);">Editar</button></div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

@@ -73,6 +73,10 @@ def products():
 def update_product():
     return render_template('update-product.html', admin=is_admin())
 
+@app.route('/recipe')
+def recipe():
+    return render_template('recipe.html', admin=is_admin())
+
 @app.route('/register', methods=['GET','POST'])
 def register():
     if request.method == 'POST':
