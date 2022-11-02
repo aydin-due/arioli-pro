@@ -50,10 +50,11 @@ def add_product():
 
         file = request.files['image']
         filename = str(id_product) + '.jpg'
-        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        img_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+        file.save(img_path)
 
 
-        product = Product(id_product, request.form['name'], request.form['description'], request.form['price'], filename, id_recipe)
+        product = Product(id_product, request.form['name'], request.form['description'], request.form['price'], img_path, id_recipe)
         products.insert_one(product.toDBCollection())
         return render_template('add-product.html', admin=is_admin(), error='Producto agregado correctamente :^)')
     return render_template('add-product.html', admin=is_admin())
@@ -91,11 +92,13 @@ def orders():
 
 @app.route('/products-admin')
 def products_admin():
-    return render_template('products-admin.html', admin=is_admin())
+    products = db['products'].find()
+    return render_template('products-admin.html', admin=is_admin(), products=products)
 
 @app.route('/products')
 def products():
-    return render_template('products.html', admin=is_admin())
+    products = db['products'].find()
+    return render_template('products.html', admin=is_admin(), products=products)
 
 @app.route('/update-product')
 def update_product():
