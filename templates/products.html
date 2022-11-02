@@ -35,7 +35,9 @@
                         <h4 style="font-family: Amaranth, sans-serif;">${{product.price}}</h4>
                     </div>
                     <div class="col d-xl-flex justify-content-xl-end">
+                        {% if user %}
                         <a class="btn btn-primary d-xl-flex" href="{{url_for('add_to_cart', id_product=product._id)}}" style="border-style: none;background: var(--bs-secondary);font-family: 'Be Vietnam Pro', sans-serif;">Agregar al carrito</a>
+                        {% endif %}
                     </div>
                 </div>
             </div>

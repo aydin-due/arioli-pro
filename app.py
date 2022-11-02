@@ -125,7 +125,10 @@ def products_admin():
 def products():
     error = request.args.get('error')
     products = db['products'].find()
-    return render_template('products.html', admin=is_admin(), products=products, error=error)
+    if 'username' in session:
+        return render_template('products.html', admin=is_admin(), products=products, error=error, user=session['username'])
+    return render_template('products.html', admin=is_admin(), products=products)
+        
 
 @app.route('/update-product')
 def update_product():
