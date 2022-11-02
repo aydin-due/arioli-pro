@@ -5,6 +5,7 @@ import secrets
 from models.user import User
 from models.recipe import Recipe
 from models.product import Product
+from models.cart import Cart
 
 db = db.dbConnection()
 app = Flask(__name__)
@@ -18,6 +19,32 @@ def is_admin():
         return user['admin']
     else:
         return False
+
+@app.route('/add-to-cart/<int:id_product>', methods=["GET", "POST"])
+def add_to_cart(id_product):
+    products = db['products']
+    product = products.find_one({"_id": id_product})
+    users = db['users']
+    user = users.find_one({"email": session['email']})
+    carts = db['carts']
+    default = {"product": product['_id'], "price": product['price'], "quantity": 1, "unit_total":product['price']}
+    if 'cart' in user:
+        id_cart = user['cart']
+        cart = carts.find_one({"_id": id_cart})
+        product_in_cart = next((product for product in cart['products'] if product['product'] == id_product), None)
+        if product_in_cart:
+            product_in_cart['quantity'] += 1
+            product_in_cart['unit_total'] = product_in_cart['quantity'] * int(product_in_cart['price'])
+            cart['products'][id_product] = product_in_cart
+        else:
+            cart['products'].append(default)
+        cart_total = sum(int(product['unit_total']) for product in cart['products'])
+        carts.update_one({"_id": id_cart}, {"$set": {"products": cart['products'], "total": cart_total}})
+    else:
+        id_cart = carts.count_documents({})
+        carts.insert_one({"_id": id_cart, "products": [default], "total": product['price']})
+        users.update_one({"email": session['email']}, {"$set": {"cart": id_cart}})
+    return redirect(url_for('products', error='Producto añadido al carrito :^)'))
 
 @app.route('/')
 def home():
@@ -52,7 +79,6 @@ def add_product():
         filename = str(id_product) + '.jpg'
         img_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
         file.save(img_path)
-
 
         product = Product(id_product, request.form['name'], request.form['description'], request.form['price'], img_path, id_recipe)
         products.insert_one(product.toDBCollection())
@@ -95,10 +121,11 @@ def products_admin():
     products = db['products'].find()
     return render_template('products-admin.html', admin=is_admin(), products=products)
 
-@app.route('/products')
+@app.route('/products', methods=["GET", "POST"])
 def products():
+    error = request.args.get('error')
     products = db['products'].find()
-    return render_template('products.html', admin=is_admin(), products=products)
+    return render_template('products.html', admin=is_admin(), products=products, error=error)
 
 @app.route('/update-product')
 def update_product():
