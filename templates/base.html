@@ -20,9 +20,8 @@
                 <ul class="navbar-nav mx-auto" style="font-family: 'Be Vietnam Pro', sans-serif;">
                     <li class="nav-item"><a class="nav-link {% if active_page == 'index' %}active{% endif %}" href="/">Inicio</a></li>
                     {% if admin %}
-                    <li class="nav-item"><a class="nav-link {% if active_page == 'products' %}active{% endif %}" href="/products-admin" style="--bs-light: #f5f6f8;--bs-light-rgb: 245,246,248;text-align: center;">Productos</a></li>
+                    <li class="nav-item"><a class="nav-link {% if active_page == 'products' %}active{% endif %}" href="/products-admin" style="--bs-light: #f5f6f8;--bs-light-rgb: 245,246,248;text-align: center;">Productos y Recetas</a></li>
                     <li class="nav-item"><a class="nav-link {% if active_page == 'orders' %}active{% endif %}" href="/orders">Pedidos</a></li>
-                    <li class="nav-item"><a class="nav-link {% if active_page == 'index' %}recipes{% endif %}" href="/recipe">Recetas</a></li>
                     {% else %}
                     <li class="nav-item"><a class="nav-link {% if active_page == 'products' %}active{% endif %}" href="/products" style="--bs-light: #f5f6f8;--bs-light-rgb: 245,246,248;">Productos</a></li>
                     <li class="nav-item"><a class="nav-link {% if active_page == 'cart' %}active{% endif %}" href="/cart">Carrito</a></li>

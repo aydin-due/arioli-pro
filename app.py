@@ -1,11 +1,15 @@
+import os
 from flask import Flask, render_template, request, Response, jsonify, url_for, redirect, session
 import database as db
 import secrets
 from models.user import User
+from models.recipe import Recipe
+from models.product import Product
 
 db = db.dbConnection()
 app = Flask(__name__)
 app.secret_key = secrets.token_hex(16)
+app.config['UPLOAD_FOLDER'] = 'static/img/products'
 
 def is_admin():
     if 'email' in session:
@@ -26,8 +30,32 @@ def account():
         return render_template('account.html', user=user, admin=is_admin())
     return render_template('account.html', admin=is_admin())
 
-@app.route('/add-product')
+@app.route('/add-product', methods=['GET', 'POST'])
 def add_product():
+    if request.method == 'POST':
+        ingredients = []
+        products = db['products']
+        recipes = db['recipes']
+        for quantity, unit, ingredient in zip(request.form.getlist('quantity'), request.form.getlist('unit'), request.form.getlist('ingredient')):
+            ingredients.append({
+                "quantity": quantity,
+                "unit": unit,
+                "ingredient": ingredient
+            })
+        id_recipe = recipes.count_documents({})
+        id_product = products.count_documents({})
+
+        recipe = Recipe(id_recipe, ingredients, request.form['procedure'])
+        recipes.insert_one(recipe.toDBCollection())
+
+        file = request.files['image']
+        filename = str(id_product) + '.jpg'
+        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+
+
+        product = Product(id_product, request.form['name'], request.form['description'], request.form['price'], filename, id_recipe)
+        products.insert_one(product.toDBCollection())
+        return render_template('add-product.html', admin=is_admin(), error='Producto agregado correctamente :^)')
     return render_template('add-product.html', admin=is_admin())
 
 @app.route('/add-recipe')

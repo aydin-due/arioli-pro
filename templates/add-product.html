@@ -12,18 +12,47 @@
         <div class="card"></div>
         <div class="card">
             <div class="card-body text-center d-flex flex-column justify-content-xl-end align-items-xl-center" style="padding-top: 30px;">
-                <form class="justify-content-xl-center align-items-xl-center" method="post">
+                <form class="justify-content-xl-center align-items-xl-center" method="post" enctype="multipart/form-data">
                     <div class="d-xl-flex justify-content-xl-center">
                         <div class="mb-3">
-                            <h4 style="font-family: Amaranth, sans-serif;margin-bottom: 20px;">Datos del producto</h4><input class="form-control" type="password" name="password" placeholder="Nombre" style="margin-bottom: 30px;font-family: 'Be Vietnam Pro', sans-serif;"><textarea class="form-control" placeholder="Descripción" style="margin-bottom: 30px;"></textarea><input class="form-control" type="number" style="margin-bottom: 20px;" placeholder="Precio"><input class="form-control" type="file" style="margin-bottom: 20px;">
+                            <h4 style="font-family: Amaranth, sans-serif;margin-bottom: 20px;">Datos del producto</h4>
+                            <input class="form-control" type="text" name="name" placeholder="Nombre" style="margin-bottom: 30px;font-family: 'Be Vietnam Pro', sans-serif;" required>
+                            <textarea class="form-control" placeholder="Descripción" name="description" style="margin-bottom: 30px;" required></textarea>
+                            <input class="form-control" type="number" style="margin-bottom: 20px;" name="price" placeholder="Precio" required>
+                            <input class="form-control" type="file" name="image" accept="image/*" style="margin-bottom: 20px;" required>
                         </div>
                         <div>
-                            <h4 style="font-family: Amaranth, sans-serif;margin-bottom: 20px;">Inserta los ingredientes</h4>
-                            <div class="d-xl-flex justify-content-sm-between justify-content-xl-around align-items-xl-start" id="ingredient" style="margin: 1px;margin-left: 50px;width: 500px;"><input class="form-control" type="number" placeholder="Cantidad" style="width: 140px;" name="quantity"><input class="form-control" type="password" name="unit" placeholder="Medida" style="margin-bottom: 30px;font-family: 'Be Vietnam Pro', sans-serif;width: 110px;"><input class="form-control" type="password" name="ingredient" placeholder="Ingrediente" style="margin-bottom: 30px;font-family: 'Be Vietnam Pro', sans-serif;width: 200px;"></div>
-                            <div class="d-xl-flex justify-content-sm-between justify-content-xl-around align-items-xl-start mb-3" style="margin: 1px;margin-left: 50px;width: 500px;"><button class="btn btn-primary" type="button" style="background: var(--bs-body-color);border-style: none;font-family: 'Be Vietnam Pro', sans-serif;">Agregar ingrediente</button></div>
-                            <div class="d-xl-flex justify-content-sm-between justify-content-xl-around align-items-xl-start" style="margin: 1px;margin-left: 50px;width: 500px;"><textarea class="form-control" placeholder="Pasos" style="margin-bottom: 30px;margin-right: 5px;margin-left: 5px;margin-top: 10px;"></textarea></div>
+                            <div id="wrapper">
+                                <h4 style="font-family: Amaranth, sans-serif;margin-bottom: 20px;">Inserta los ingredientes</h4>
+                                <div class="d-xl-flex justify-content-sm-between justify-content-xl-around align-items-xl-start" id="ingredient" style="margin: 1px;margin-left: 50px;width: 500px;">
+                                    <input class="form-control" type="number" placeholder="Cantidad" style="width: 140px;" name="quantity" required>
+                                    <input class="form-control" type="text" name="unit" placeholder="Medida" style="margin-bottom: 30px;font-family: 'Be Vietnam Pro', sans-serif;width: 110px;" required>
+                                    <input class="form-control" type="text" name="ingredient" placeholder="Ingrediente" style="margin-bottom: 30px;font-family: 'Be Vietnam Pro', sans-serif;width: 200px;" required>
+                                </div>
+                            </div>
+                            <div class="d-xl-flex justify-content-sm-between justify-content-xl-around align-items-xl-start mb-3" style="margin: 1px;margin-left: 50px;width: 500px;">
+                                <button class="btn btn-primary" type="button" style="background: var(--bs-body-color);border-style: none;font-family: 'Be Vietnam Pro', sans-serif;" id="btn">Agregar ingrediente</button>
+                            </div>
+                            <div class="d-xl-flex justify-content-sm-between justify-content-xl-around align-items-xl-start" style="margin: 1px;margin-left: 50px;width: 500px;">
+                                <textarea class="form-control" placeholder="Pasos" name="procedure" style="margin-bottom: 30px;margin-right: 5px;margin-left: 5px;margin-top: 10px;" required></textarea>
+                            </div>
                         </div>
-                    </div><button class="btn btn-primary" type="button" style="background: var(--bs-secondary);border-style: none;font-family: 'Be Vietnam Pro', sans-serif;">Añadir producto</button>
+                    </div>
+                    <button class="btn btn-primary" type="submit" style="background: var(--bs-secondary);border-style: none;font-family: 'Be Vietnam Pro', sans-serif;">Añadir producto</button>
+                    {% if error %}
+                    <div class="mb-3">
+                        <p class="fw-bold text-success mb-2", style="color: #c1292e !important;font-family: 'Be Vietnam Pro', sans-serif;"">{{ error }}</p>
+                    </div>
+                    {% endif %}
+                    <script>
+                        const fields = document.querySelector("#ingredients");
+                        const btn = document.querySelector("#btn");
+
+                            btn.addEventListener("click", function () {
+                                $("#ingredient").clone().find("input").val("").end().appendTo("#wrapper");
+                                console.log('a');
+                        });
+                    </script>
                 </form>
             </div>
         </div>
