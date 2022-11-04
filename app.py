@@ -70,12 +70,14 @@ def add_product():
             ingredients.append({
                 "quantity": quantity,
                 "unit": unit,
-                "ingredient": ingredient
+                "name": ingredient
             })
         id_recipe = recipes.count_documents({})
         id_product = products.count_documents({})
 
-        recipe = Recipe(id_recipe, ingredients, request.form['procedure'])
+        steps = request.form['procedure'].split()
+
+        recipe = Recipe(id_recipe, ingredients, steps, request.form['portions'])
         recipes.insert_one(recipe.toDBCollection())
 
         file = request.files['image']
@@ -146,9 +148,15 @@ def products():
 def update_product():
     return render_template('update-product.html', admin=is_admin())
 
-@app.route('/recipe')
-def recipe():
-    return render_template('recipe.html', admin=is_admin())
+@app.route('/recipe/<int:id_product>', methods=['GET', 'POST'])
+def recipe(id_product):
+    products = db['products']
+    recipes = db['recipes']
+    product = products.find_one({"_id": id_product})
+    recipe = recipes.find_one({"_id": product['recipe']})
+    print(product)
+    print(recipe)
+    return render_template('recipe.html', admin=is_admin(), product=product, recipe=recipe)
 
 @app.route('/register', methods=['GET','POST'])
 def register():

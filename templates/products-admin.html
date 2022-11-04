@@ -27,7 +27,9 @@
             <h4 class="card-title" style="font-family: Amaranth, sans-serif;text-align: center;padding-top: 30px;">{{product.name}}</h4>
             <p class="card-text">{{product.description}}</p>
             <div class="row d-xl-flex justify-content-xl-center" style="margin-bottom: 20px;">
-                <div class="col-xl-6 d-xl-flex justify-content-xl-end"><button class="btn btn-primary d-xl-flex" type="button" style="border-style: none;background: var(--bs-body-color);font-family: 'Be Vietnam Pro', sans-serif;">Ver receta</button></div>
+                <div class="col-xl-6 d-xl-flex justify-content-xl-end">
+                    <a class="btn btn-primary d-xl-flex" href="{{url_for('recipe', id_product=product._id)}}" style="border-style: none;background: var(--bs-body-color);font-family: 'Be Vietnam Pro', sans-serif;">Ver receta</a>
+                </div>
             </div>
             <div class="row d-xl-flex justify-content-xl-center">
                 <div class="col-xl-5 d-xl-flex justify-content-xl-end"><button class="btn btn-primary d-xl-flex" type="button" style="border-style: none;background: var(--bs-danger);font-family: 'Be Vietnam Pro', sans-serif;">Eliminar</button></div>
