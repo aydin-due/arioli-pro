@@ -27,22 +27,25 @@ def add_to_cart(id_product):
     users = db['users']
     user = users.find_one({"email": session['email']})
     carts = db['carts']
-    default = {"product": product['_id'], "price": product['price'], "quantity": 1, "unit_total":product['price']}
+    product['quantity'] = 1
+    product['unit_total'] = product['price']
     if 'cart' in user:
         id_cart = user['cart']
         cart = carts.find_one({"_id": id_cart})
-        product_in_cart = next((product for product in cart['products'] if product['product'] == id_product), None)
-        if product_in_cart:
-            product_in_cart['quantity'] += 1
-            product_in_cart['unit_total'] = product_in_cart['quantity'] * int(product_in_cart['price'])
-            cart['products'][id_product] = product_in_cart
+        print('CART !!! ', cart)
+        index = next((i for i, product in enumerate(cart['products']) if product['_id'] == id_product), None)
+        if index is not None:
+            product_in_cart = cart['products'][index]
+            cart['products'][index]['quantity'] += 1
+            cart['products'][index]['unit_total'] = product_in_cart['quantity'] * int(product_in_cart['price'])
         else:
-            cart['products'].append(default)
+            cart['products'].append(product)
         cart_total = sum(int(product['unit_total']) for product in cart['products'])
         carts.update_one({"_id": id_cart}, {"$set": {"products": cart['products'], "total": cart_total}})
     else:
         id_cart = carts.count_documents({})
-        carts.insert_one({"_id": id_cart, "products": [default], "total": product['price']})
+        cart = Cart(id_cart, [product], product['price'])
+        carts.insert_one(cart.toDBCollection())
         users.update_one({"email": session['email']}, {"$set": {"cart": id_cart}})
     return redirect(url_for('products', error='Producto añadido al carrito :^)'))
 
@@ -91,6 +94,12 @@ def add_recipe():
 
 @app.route('/cart')
 def cart():
+    if 'username' in session:
+        users = db['users']
+        user = users.find_one({"email": session['email']})
+        carts = db['carts']
+        cart = carts.find_one({"_id": user['cart']})
+        return render_template('cart.html', cart=cart, admin=is_admin(), user=user)
     return render_template('cart.html', admin=is_admin())
 
 @app.route('/login', methods=['GET', 'POST'])
