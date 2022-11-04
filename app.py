@@ -97,10 +97,13 @@ def cart():
     if 'username' in session:
         users = db['users']
         user = users.find_one({"email": session['email']})
-        carts = db['carts']
-        cart = carts.find_one({"_id": user['cart']})
-        return render_template('cart.html', cart=cart, admin=is_admin(), user=user)
-    return render_template('cart.html', admin=is_admin())
+        if 'cart' in user:
+            carts = db['carts']
+            cart = carts.find_one({"_id": user['cart']})
+            return render_template('cart.html', cart=cart, admin=is_admin(), user=user)
+        else:
+            return render_template('cart.html', admin=is_admin(), user=user, error='Su carrito de compras está vacío ;(')
+    return render_template('cart.html', admin=is_admin(), error="Inicie sesión para ver su carrito de compras, o cree una cuenta si no tiene una :^)")
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():

@@ -11,13 +11,11 @@
             <h1 style="font-family: Amaranth, sans-serif;color: var(--bs-body-color);">Carrito de compras</h1>
         </div>
     </div>
-    {% if user %}
+    {% if cart %}
     <div class="row mb-4 mb-lg-5" style="text-align: center;">
         <div class="col d-lg-flex d-xl-flex justify-content-lg-start justify-content-xl-center align-items-xl-center"><a class="btn btn-primary shadow" role="button" href="signup.html" style="border-style: none;background: var(--bs-body-color);font-family: 'Be Vietnam Pro', sans-serif;">Realizar pedido</a></div>
     </div>
-    {% endif %}
 </div>
-{% if user %}
 <div class="container">
     <div class="card" style="margin-bottom: 100PX;">
         <div class="card-body">
@@ -65,11 +63,12 @@
         </div>
     </div>
 </div>
-{% else %}
+{% endif %}
+{% if error %}
 <div class="container py-5" style="border-radius: 50px;">
     <div class="row mb-4 mb-lg-5">
         <div class="col-md-8 col-xl-6 text-center mx-auto">
-            <p class="fw-bold text-success mb-2", style="color: #c1292e !important;font-family: 'Be Vietnam Pro', sans-serif;"">Inicia sesión o crea una cuenta :^)</p>
+            <p class="fw-bold text-success mb-2", style="color: #c1292e !important;font-family: 'Be Vietnam Pro', sans-serif;"">{{error}}</p>
         </div>
     </div>
 </div>
