@@ -36,20 +36,29 @@
                         {% for product in cart['products'] %}
                         <tr id="product-container">
                             <td class="d-lg-flex d-xl-flex align-items-lg-center align-items-xl-center">
-                                <div class="col-lg-2 col-xl-3"><img src="assets/img/products/1.jpg" width="100" style="border-radius: 10%;width: 80px;height: 80px;"></div>
+                                <div class="col-lg-2 col-xl-3"><img src="{{product.image}}" width="100" style="border-radius: 10%;width: 80px;height: 80px;"></div>
                                 <div class="col-lg-7 col-xl-8">
-                                    <p>Nombre del producto</p>
-                                    <h6 class="text-muted mb-2">Descripción del producto</h6>
+                                    <p>{{product.name}}</p>
+                                    <h6 class="text-muted mb-2">{{product.description}}</h6>
                                 </div>
                             </td>
-                            <td style="vertical-align: middle;">$0.00</td>
-                            <td style="vertical-align: middle;"><input type="number" placeholder="Cantidad" style="width: 140px;background-clip: padding-box;border: 1px solid #ced4da;border-radius: 1rem;padding: .6rem 1.5rem;" name="quantity"></td>
-                            <td style="vertical-align: middle;">$0.00</td>
+                            <td style="vertical-align: middle;">${{product.price}}</td>
+                            <td style="vertical-align: middle;">
+                                <input type="number" placeholder="Cantidad" value={{product.quantity}} style="width: 140px;background-clip: padding-box;border: 1px solid #ced4da;border-radius: 1rem;padding: .6rem 1.5rem;" name="quantity">
+                            </td>
+                            <td style="vertical-align: middle;">${{product.unit_total}}</td>
                             <td style="vertical-align: middle;"><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-x-circle-fill text-danger">
                                         <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"></path>
                                     </svg></a></td>
                         </tr>
                         {% endfor %}
+                        <tr id="product-container">
+                            <td class="vertical-align: middle;"></td>
+                            <td style="vertical-align: middle;"></td>
+                            <td style="vertical-align: middle;"></td>
+                            <td style="vertical-align: middle;">${{cart.total}}</td>
+                            <td style="vertical-align: middle;"></td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
