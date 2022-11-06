@@ -4,11 +4,13 @@ class Order:
         self.products = products
         self.total = total
         self.date = date
+        self.delivered = False
     
     def toDBCollection(self):
         return {
             "_id": self.id,
             "products": self.products,
             "total": self.total,
-            "date": self.date
+            "date": self.date,
+            "delivered": self.delivered
         }

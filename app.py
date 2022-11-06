@@ -2,10 +2,12 @@ import os
 from flask import Flask, render_template, request, Response, jsonify, url_for, redirect, session
 import database as db
 import secrets
+import datetime
 from models.user import User
 from models.recipe import Recipe
 from models.product import Product
 from models.cart import Cart
+from models.order import Order
 
 db = db.dbConnection()
 app = Flask(__name__)
@@ -112,8 +114,9 @@ def add_product():
                 "unit": unit,
                 "name": ingredient
             })
-        id_recipe = recipes.count_documents({})
-        id_product = products.count_documents({})
+
+        id_recipe = get_id(recipes)
+        id_product = get_id(products)
 
         steps = request.form['procedure'].split()
 
@@ -175,7 +178,6 @@ def add_to_cart(id_product):
     if 'cart' in user:
         id_cart = user['cart']
         cart = carts.find_one({"_id": id_cart})
-        print('CART !!! ', cart)
         index = next((i for i, product in enumerate(cart['products']) if product['_id'] == id_product), None)
         if index is not None:
             product_in_cart = cart['products'][index]
@@ -186,7 +188,7 @@ def add_to_cart(id_product):
         cart_total = sum(int(product['unit_total']) for product in cart['products'])
         carts.update_one({"_id": id_cart}, {"$set": {"products": cart['products'], "total": cart_total}})
     else:
-        id_cart = carts.count_documents({})
+        id_cart = get_id(carts)
         cart = Cart(id_cart, [product], product['price'])
         carts.insert_one(cart.toDBCollection())
         users.update_one({"email": session['email']}, {"$set": {"cart": id_cart}})
@@ -197,8 +199,38 @@ def add_to_cart(id_product):
 
 @app.route('/orders')
 def orders():
-    return render_template('orders.html', admin=is_admin())
+    error = request.args.get('error')
+    if 'username' in session:
+        return render_template('orders.html', admin=is_admin(), error=error, user=session['username'])
+    return render_template('orders.html', admin=is_admin(), error="Inicie sesión para ver su historial de órdenes, o cree una cuenta si no tiene una :^)")
 
+@app.route('/make-order/<int:id_cart>', methods=["GET", "POST"])
+def make_order(id_cart):
+    carts = db['carts']
+    cart = carts.find_one({"_id": id_cart})
+    users = db['users']
+    user = users.find_one({"email": session['email']})
+    orders = db['orders']
+    id_order = get_id(orders)
+    date = datetime.datetime.now()
+    order = Order(id_order, cart['products'], cart['total'], date)
+    orders.insert_one(order.toDBCollection())
+    users.update_one({"email": session['email']}, {"$unset": {"cart": ""}})
+    carts.delete_one({"_id": id_cart})
+    if 'orders' in user:
+        user['orders'].append(id_order)
+        users.update_one({"email": session['email']}, {"$set": {"orders": user['orders']}})
+    else:
+        users.update_one({"email": session['email']}, {"$set": {"orders": [id_order]}})
+    return redirect(url_for('orders', error='Orden realizada correctamente :^)'))
+
+
+# UTILS
+
+def get_id(collection):
+    if collection.count_documents({}) == 0:
+        return 0
+    return collection.find().sort('_id', -1).limit(1)[0]['_id'] + 1
 
 if __name__ == '__main__':
     app.run(debug=True, port=4000)

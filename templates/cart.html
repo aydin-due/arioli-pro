@@ -13,7 +13,7 @@
     </div>
     {% if cart %}
     <div class="row mb-4 mb-lg-5" style="text-align: center;">
-        <div class="col d-lg-flex d-xl-flex justify-content-lg-start justify-content-xl-center align-items-xl-center"><a class="btn btn-primary shadow" role="button" href="signup.html" style="border-style: none;background: var(--bs-body-color);font-family: 'Be Vietnam Pro', sans-serif;">Realizar pedido</a></div>
+        <div class="col d-lg-flex d-xl-flex justify-content-lg-start justify-content-xl-center align-items-xl-center"><a class="btn btn-primary shadow" role="button" href="{{url_for('make_order', id_cart=cart._id)}}" style="border-style: none;background: var(--bs-body-color);font-family: 'Be Vietnam Pro', sans-serif;">Realizar pedido</a></div>
     </div>
 </div>
 <div class="container">

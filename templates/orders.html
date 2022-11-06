@@ -11,7 +11,17 @@
             <h1 style="font-family: Amaranth, sans-serif;color: var(--bs-body-color);">Historial de pedidos</h1>
         </div>
     </div>
+{% if error %}
+<div class="container py-5" style="border-radius: 50px;">
+    <div class="row mb-4 mb-lg-5">
+        <div class="col-md-8 col-xl-6 text-center mx-auto">
+            <p class="fw-bold text-success mb-2", style="color: #c1292e !important;font-family: 'Be Vietnam Pro', sans-serif;"">{{error}}</p>
+        </div>
+    </div>
 </div>
+{% endif %}
+</div>
+{% if user %}
 <div class="container" id="order-container">
     <div class="row" style="margin-bottom: 50px;">
         <div class="col">
@@ -128,4 +138,5 @@
         </div>
     </div>
 </div>
+{% endif %}
 {% endblock %}
