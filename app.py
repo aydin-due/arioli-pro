@@ -146,9 +146,12 @@ def recipe(id_product):
     recipes = db['recipes']
     product = products.find_one({"_id": id_product})
     recipe = recipes.find_one({"_id": product['recipe']})
-    print(product)
-    print(recipe)
-    return render_template('recipe.html', admin=is_admin(), product=product, recipe=recipe)
+    if request.method == 'POST':
+        portions = request.form['portions']
+        for ingredient in recipe['ingredients']:
+            ingredient['quantity'] = float(ingredient['quantity']) * float(portions) / float(recipe['portions'])
+        return render_template('recipe.html', admin=is_admin(), product=product, recipe=recipe, portions=portions)
+    return render_template('recipe.html', admin=is_admin(), product=product, recipe=recipe, portions=recipe['portions'])
 
 
 # CART

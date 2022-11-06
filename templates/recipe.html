@@ -11,10 +11,12 @@
                 <h1 style="font-family: Amaranth, sans-serif;color: var(--bs-body-color);margin-bottom: 20px;text-align: left;">{{product.name}}</h1>
                 <h6 class="text-muted mb-2" style="text-align: left;margin-bottom: 20px;">{{product.description}}</h6>
                 <div class="row">
-                    <div class="col-xl-12 d-flex align-items-end" style="height: 60px;">
-                        <input type="number" placeholder="Porciones" value="{{recipe.portions}}" style="width: 150px;border: 1px solid #ced4da;border-radius: 1rem;padding: .6rem 1.5rem;text-align: left;background: var(--bs-light);" name="portion">
-                        <a class="btn btn-primary shadow" role="button" href="account.html" style="border-style: none;background: var(--bs-body-color);font-family: 'Be Vietnam Pro', sans-serif;margin-left: 50px;">Convertir porciones</a>
-                    </div>
+                    <form method="POST">
+                        <div class="col-xl-12 d-flex align-items-end" style="height: 60px;">
+                            <input type="number" min="1" placeholder="Porciones" name="portions" value="{{portions}}" style="width: 150px;border: 1px solid #ced4da;border-radius: 1rem;padding: .6rem 1.5rem;text-align: left;background: var(--bs-light);" name="portion">
+                            <button class="btn btn-primary shadow" type="submit" style="border-style: none;background: var(--bs-body-color);font-family: 'Be Vietnam Pro', sans-serif;margin-left: 50px;">Convertir porciones</button>
+                        </div>
+                    </form>
                 </div>
             </div>
             <div class="col-md-8 col-xl-6 text-center mx-auto">
