@@ -201,7 +201,17 @@ def add_to_cart(id_product):
 def orders():
     error = request.args.get('error')
     if 'username' in session:
-        return render_template('orders.html', admin=is_admin(), error=error, user=session['username'])
+        users = db['users']
+        user = users.find_one({"email": session['email']})
+        if 'orders' not in user:
+            return render_template('orders.html', admin=is_admin(), user=user, error='No tiene ninguna orden :(')
+        orders = db['orders']
+        orders_list = []
+        for id_order in user['orders']:
+            order = orders.find_one({"_id": id_order})
+            orders_list.append(order)
+        orders_list.reverse()
+        return render_template('orders.html', orders=orders_list, admin=is_admin(), user=user, error=error)
     return render_template('orders.html', admin=is_admin(), error="Inicie sesión para ver su historial de órdenes, o cree una cuenta si no tiene una :^)")
 
 @app.route('/make-order/<int:id_cart>', methods=["GET", "POST"])
