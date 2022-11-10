@@ -224,6 +224,13 @@ def orders():
     if 'username' in session:
         users = db['users']
         user = users.find_one({"email": session['email']})
+        if user['admin']:
+            orders = db['orders']
+            orders = list(orders.find())
+            for order in orders:
+                order['client'] = users.find_one({"orders": order['_id']})
+            print(orders)
+            return render_template('orders-admin.html', admin=is_admin(), user=user, orders=orders)
         if 'orders' not in user:
             return render_template('orders.html', admin=is_admin(), user=user, error='No tiene ninguna orden :(')
         orders = db['orders']
@@ -255,6 +262,15 @@ def make_order(id_cart):
         users.update_one({"email": session['email']}, {"$set": {"orders": [id_order]}})
     return redirect(url_for('orders', error='Orden realizada correctamente :^)'))
 
+@app.route('/delivered-order/<int:id_order>')
+def delivered_order(id_order):
+    orders = db['orders']
+    order = orders.find_one({"_id": id_order})
+    if order['delivered']:
+        orders.update_one({"_id": id_order}, {"$set": {"delivered": False}})
+    else:
+        orders.update_one({"_id": id_order}, {"$set": {"delivered": True}})
+    return redirect(url_for('orders'))
 
 # UTILS
 
