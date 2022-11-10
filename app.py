@@ -199,7 +199,23 @@ def add_to_cart(id_product):
         users.update_one({"email": session['email']}, {"$set": {"cart": id_cart}})
     return redirect(url_for('products', error='Producto añadido al carrito :^)'))
 
-
+@app.route('/remove-from-cart/<int:id_product>')
+def remove_from_cart(id_product):
+    products = db['products']
+    product = products.find_one({"_id": id_product})
+    users = db['users']
+    user = users.find_one({"email": session['email']})
+    carts = db['carts']
+    id_cart = user['cart']
+    cart = carts.find_one({"_id": id_cart})
+    index = next((i for i, product in enumerate(cart['products']) if product['_id'] == id_product), None)
+    cart['products'].pop(index)
+    cart_total = sum(int(product['unit_total']) for product in cart['products'])
+    if cart_total == 0:
+        carts.delete_one({"_id": id_cart})
+        users.update_one({"email": session['email']}, {"$unset": {"cart": ""}})
+    carts.update_one({"_id": id_cart}, {"$set": {"products": cart['products'], "total": cart_total}})
+    return redirect(url_for('cart', error='Producto eliminado del carrito ;('))
 # ORDER
 
 @app.route('/orders')
