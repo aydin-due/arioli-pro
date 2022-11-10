@@ -19,6 +19,13 @@
     <div class="row mb-4 mb-lg-5" style="text-align: center;">
         <div class="col d-lg-flex d-xl-flex justify-content-lg-start justify-content-xl-center"><a class="btn btn-primary shadow" role="button" href="/add-product" style="border-style: none;background: var(--bs-body-color);font-family: 'Be Vietnam Pro', sans-serif;">Agregar productos</a></div>
     </div>
+    <div class="row mb-4 mb-lg-5" style="text-align: center;">
+        {% if error %}
+        <div class="mb-3">
+            <p class="fw-bold text-success mb-2", style="color: #c1292e !important;font-family: 'Be Vietnam Pro', sans-serif;"">{{ error }}</p>
+        </div>
+        {% endif %}
+    </div>
 </div>
 <div class="container d-xl-flex justify-content-evenly flex-wrap align-items-xl-center">
     {% for product in products %}
@@ -32,8 +39,12 @@
                 </div>
             </div>
             <div class="row d-xl-flex justify-content-xl-center">
-                <div class="col-xl-5 d-xl-flex justify-content-xl-end"><button class="btn btn-primary d-xl-flex" type="button" style="border-style: none;background: var(--bs-danger);font-family: 'Be Vietnam Pro', sans-serif;">Eliminar</button></div>
-                <div class="col-xl-5 d-xl-flex justify-content-xl-end"><button class="btn btn-primary d-xl-flex" type="button" style="border-style: none;background: var(--bs-secondary);font-family: 'Be Vietnam Pro', sans-serif;">Editar</button></div>
+                <div class="col-xl-5 d-xl-flex justify-content-xl-end">
+                    <a class="btn btn-primary d-xl-flex" role="button" href="{{url_for('delete_product', id_product=product._id)}}" style="border-style: none;background: var(--bs-danger);font-family: 'Be Vietnam Pro', sans-serif;">Eliminar</a>
+                </div>
+                <div class="col-xl-5 d-xl-flex justify-content-xl-end">
+                    <a class="btn btn-primary d-xl-flex" role="button" href="{{url_for('update_product', id_product=product._id)}}" style="border-style: none;background: var(--bs-secondary);font-family: 'Be Vietnam Pro', sans-serif;">Editar</a>
+                </div>
             </div>
         </div>
     </div>

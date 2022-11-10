@@ -91,8 +91,9 @@ def logout():
 
 @app.route('/products-admin')
 def products_admin():
+    error = request.args.get('error')
     products = db['products'].find()
-    return render_template('products-admin.html', admin=is_admin(), products=products)
+    return render_template('products-admin.html', admin=is_admin(), products=products, error=error)
 
 @app.route('/products', methods=["GET", "POST"])
 def products():
@@ -133,9 +134,25 @@ def add_product():
         return render_template('add-product.html', admin=is_admin(), error='Producto agregado correctamente :^)')
     return render_template('add-product.html', admin=is_admin())        
 
-@app.route('/update-product')
-def update_product():
-    return render_template('update-product.html', admin=is_admin())
+@app.route('/update-product/<int:id_product>')
+def update_product(id_product):
+    products = db['products']
+    product = products.find_one({'_id': id_product})
+    recipe = db['recipes'].find_one({'_id': product['recipe']})
+    recipe['steps'] = '\n'.join(recipe['steps'])
+    print(product)
+    if request.method == 'POST':
+        return render_template('update-product.html', admin=is_admin(), product=product, recipe=recipe)
+    return render_template('update-product.html', admin=is_admin(), product=product, recipe=recipe)
+
+@app.route('/delete-product/<int:id_product>')
+def delete_product(id_product):
+    products = db['products']
+    product = products.find_one({'_id': id_product})
+    if product:
+        products.delete_one({'_id': id_product})
+        return redirect(url_for('products_admin', error='Producto eliminado correctamente :^)'))
+    return redirect(url_for('products_admin', error='El producto no existe'))
 
 
 # RECIPE
