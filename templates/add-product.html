@@ -28,6 +28,9 @@
                                     <input class="form-control" type="number" placeholder="Cantidad" style="width: 140px;" name="quantity" min="1" required>
                                     <input class="form-control" type="text" name="unit" placeholder="Medida" style="margin-bottom: 30px;font-family: 'Be Vietnam Pro', sans-serif;width: 110px;" required>
                                     <input class="form-control" type="text" name="ingredient" placeholder="Ingrediente" style="margin-bottom: 30px;font-family: 'Be Vietnam Pro', sans-serif;width: 200px;" required>
+                                    <svg xmlns="http://www.w3.org/2000/svg" id="delete" style="margin-top:15px;" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-x-circle-fill text-danger">
+                                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"></path>
+                                    </svg>
                                 </div>
                             </div>
                             <div class="d-xl-flex justify-content-sm-between justify-content-xl-around align-items-xl-start mb-3" style="margin: 1px;margin-left: 50px;width: 500px;">
@@ -56,15 +59,33 @@
                     <script>
                         const fields = document.querySelector("#ingredients");
                         const btn = document.querySelector("#btn");
+                        var deleteBtns = document.querySelectorAll("#delete");
 
                             btn.addEventListener("click", function () {
                                 $("#ingredient").clone().find("input").val("").end().appendTo("#wrapper");
-                                console.log('a');
+                                deleteBtns = document.querySelectorAll("#delete");
+                                deleteBtns.forEach((btn, index) => {
+                                    btn.addEventListener("click", function () {
+                                        console.log(deleteBtns.length);
+                                        console.log('a');
+                                        btn.parentElement.remove();
+                                    });
+                                });
                         });
+
                     </script>
                 </form>
             </div>
         </div>
     </div>
 </section>
+
+<!-- <script>
+    $(document).ready(function () {
+        console.log('a');
+        $("#delete").click(function () {
+            $(this).parent().remove();
+        });
+    });
+</script> -->
 {% endblock %}
