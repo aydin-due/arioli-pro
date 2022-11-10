@@ -64,10 +64,11 @@ def register():
         users = db['users']
         username = request.form['username']
         email = request.form['email']
+        phone = request.form['phone']
         password = request.form['password']
 
-        if username and email and password:
-            user = User(username, email, password)
+        if username and email and password and phone:
+            user = User(username, email, password, phone)
             if users.find_one({'email': email}):
                 return render_template('register.html', error='El correo ya está en uso', admin=is_admin())
             users.insert_one(user.toBDCollection())
@@ -86,19 +87,35 @@ def logout():
         session.pop('email',None)
         return redirect('/')
 
+@app.route('/update-account', methods=['GET', 'POST'])
+def update_account():
+    users = db['users']
+    user = users.find_one({"email": session['email']})
+    if request.method == 'POST':
+        username = request.form['username']
+        email = request.form['email']
+        phone = request.form['phone']
+        password = request.form['password']
+
+        if username and email and password and phone:
+            user = User(username, email, password, phone)
+            users.update_one({'email': session['email']}, {'$set': user.toBDCollection()})
+            session['username'] = username
+            session['email'] = email
+            return redirect(url_for('account'))
+        else:
+            return render_template('update-account.html', error='Por favor llene todos los campos', admin=is_admin(), user=user)
+    else:
+        return render_template('update-account.html', admin=is_admin(), user=user)
 
 # PRODUCT
-
-@app.route('/products-admin')
-def products_admin():
-    error = request.args.get('error')
-    products = db['products'].find()
-    return render_template('products-admin.html', admin=is_admin(), products=products, error=error)
 
 @app.route('/products', methods=["GET", "POST"])
 def products():
     error = request.args.get('error')
     products = db['products'].find()
+    if is_admin():
+        return render_template('products-admin.html', admin=is_admin(), products=products, error=error)
     if 'username' in session:
         return render_template('products.html', admin=is_admin(), products=products, error=error, user=session['username'])
     return render_template('products.html', admin=is_admin(), products=products)
@@ -271,6 +288,7 @@ def delivered_order(id_order):
     else:
         orders.update_one({"_id": id_order}, {"$set": {"delivered": True}})
     return redirect(url_for('orders'))
+
 
 # UTILS
 

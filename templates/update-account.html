@@ -9,7 +9,7 @@
             <div class="row mb-4 mb-lg-5">
                 <div class="col-md-8 col-xl-6 text-center mx-auto">
                     <p class="fw-bold text-success mb-2"></p>
-                    <h1 class="fw-bold" style="font-family: Amaranth, sans-serif;">Crea una cuenta</h1>
+                    <h1 class="fw-bold" style="font-family: Amaranth, sans-serif;">Modifica tu cuenta</h1>
                 </div>
             </div>
             <div class="row d-flex justify-content-center">
@@ -19,13 +19,13 @@
                             <form method="POST">
                                 <div class="mb-3"></div>
                                 <div class="mb-3">
-                                    <input class="form-control" type="text" name="username" placeholder="Nombre de usuario" style="margin-bottom: 30px;font-family: 'Be Vietnam Pro', sans-serif;">
-                                    <input class="form-control" type="text" name="email" placeholder="Correo electrónico" style="margin-bottom: 30px;font-family: 'Be Vietnam Pro', sans-serif;">
-                                    <input class="form-control" type="tel" name="phone" placeholder="Número de teléfono" style="margin-bottom: 30px;font-family: 'Be Vietnam Pro', sans-serif;">
-                                    <input class="form-control" type="password" name="password" placeholder="Contraseña" style="margin-bottom: 30px;font-family: 'Be Vietnam Pro', sans-serif;">
+                                    <input class="form-control" value="{{ user.username }}" type="text" name="username" placeholder="Nombre de usuario" style="margin-bottom: 30px;font-family: 'Be Vietnam Pro', sans-serif;">
+                                    <input class="form-control" value="{{ user.email }}" type="text" name="email" placeholder="Correo electrónico" style="margin-bottom: 30px;font-family: 'Be Vietnam Pro', sans-serif;">
+                                    <input class="form-control"  value="{{ user.phone }}" type="tel" name="phone" placeholder="Número de teléfono" style="margin-bottom: 30px;font-family: 'Be Vietnam Pro', sans-serif;">
+                                    <input class="form-control"  value="{{ user.password }}" type="password" name="password" placeholder="Contraseña" style="margin-bottom: 30px;font-family: 'Be Vietnam Pro', sans-serif;">
                                 </div>
                                 <div class="mb-3">
-                                    <button class="btn btn-primary shadow d-block w-100" type="submit" style="background: var(--bs-secondary);border-style: none;font-family: 'Be Vietnam Pro', sans-serif;">Crear cuenta</button>
+                                    <button class="btn btn-primary shadow d-block w-100" type="submit" style="background: var(--bs-secondary);border-style: none;font-family: 'Be Vietnam Pro', sans-serif;">Modificar cuenta</button>
                                 </div>
                                 {% if error %}
                                 <div class="mb-3">

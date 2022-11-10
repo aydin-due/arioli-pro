@@ -21,6 +21,7 @@
                                 <div class="mb-3">
                                     {% if user %}
                                     <p style="font-size: 20px;font-family: 'Be Vietnam Pro', sans-serif;">Bienvenido, {{ user }}</p>
+                                    <a class="btn btn-primary shadow d-block w-100" role="button" href="/update-account" style="background: var(--bs-secondary);border-style: none;font-family: 'Be Vietnam Pro', sans-serif;margin-bottom: 20px;">Modificar cuenta</a>
                                     <a class="btn btn-primary shadow d-block w-100" role="button" href="/logout" style="background: var(--bs-secondary);border-style: none;font-family: 'Be Vietnam Pro', sans-serif;">Cerrar sesión</a>
                                     {% else %}
                                     <p style="font-size: 20px;font-family: 'Be Vietnam Pro', sans-serif;">Bienvenido</p>

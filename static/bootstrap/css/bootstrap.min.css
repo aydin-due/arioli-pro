@@ -347,6 +347,7 @@ textarea {
   font-size: inherit;
   line-height: inherit;
 }
+
 button,
 select {
   text-transform: none;
@@ -10702,3 +10703,4 @@ footer ul li a {
     --ref-products-per-row: 3 !important;
   }
 }
+

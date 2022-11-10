@@ -37,8 +37,11 @@
                 <div class="col d-xl-flex justify-content-xl-center align-items-xl-center">
                     <p style="color: var(--bs-body-color);"><strong>Cliente: </strong>{{order.client.username}}</p>
                 </div>
+                <div class="col d-xl-flex justify-content-xl-center align-items-xl-center">
+                    <p style="color: var(--bs-body-color);"><strong>Contacto: </strong>{{order.client.phone}}</p>
+                </div>
                 <div class="col d-xl-flex justify-content-xl-end">
-                    <a class="btn btn-primary shadow" role="button" href="{{url_for('delivered_order', id_order=order._id)}}" style="border-style: none;background: var(--bs-body-color);font-family: 'Be Vietnam Pro', sans-serif;">{% if not order.delivered %} Marcar como entregado {% else %} Deshacer entrega {% endif %}</a>
+                    <a class="btn btn-primary shadow" role="button" href="{{url_for('delivered_order', id_order=order._id)}}" style="border-style: none;background: var(--bs-body-color);font-family: 'Be Vietnam Pro', sans-serif;">{% if not order.delivered %} Realizar entrega {% else %} Deshacer entrega {% endif %}</a>
                 </div>
             </div>
         </div>
