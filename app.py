@@ -122,11 +122,11 @@ def update_product(id_product):
     recipe = db['recipes'].find_one({'_id': id_recipe})
     recipe['steps'] = '\n'.join(recipe['steps'])
     if request.method == 'POST':
-        product, recipe = set_product(request)
-        print(product.toDBCollection())
-        print(recipe.toDBCollection())
+        product, recipe = set_product(request, id_product = id_product, id_recipe = id_recipe)
         products.update_one({'_id': id_product}, {'$set': product.updateDBCollection()})
         db['recipes'].update_one({'_id': id_recipe}, {'$set': recipe.updateDBCollection()})
+        recipe = db['recipes'].find_one({'_id': id_recipe})
+        recipe['steps'] = '\n'.join(recipe['steps'])
         return render_template('update-product.html', admin=is_admin(), product=product, recipe=recipe, error='Producto actualizado correctamente :^)')
     return render_template('update-product.html', admin=is_admin(), product=product, recipe=recipe)
 
@@ -247,7 +247,7 @@ def get_id(collection):
         return 0
     return collection.find().sort('_id', -1).limit(1)[0]['_id'] + 1
 
-def set_product(request):
+def set_product(request, *args, **kwargs):
     products = db['products']
     recipes = db['recipes']
     ingredients = []
@@ -258,9 +258,15 @@ def set_product(request):
             "name": ingredient
         })
 
-    
-    id_product = get_id(products)
-    id_recipe = get_id(recipes)
+    if 'id_product' in kwargs:
+        id_product = kwargs['id_product']
+    else:
+        id_product = get_id(products)
+
+    if 'id_recipe' in kwargs:
+        id_recipe = kwargs['id_recipe']
+    else:
+        id_recipe = get_id(recipes)
 
     steps = request.form['procedure'].split()
 
