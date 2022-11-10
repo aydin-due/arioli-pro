@@ -353,6 +353,3 @@ def set_product(request, *args, **kwargs):
     product = Product(id_product, request.form['name'], request.form['description'], request.form['price'], img_path, id_recipe)
 
     return [product, recipe]
-
-if __name__ == '__main__':
-    app.run(debug=True, port=4000)
