@@ -12,3 +12,10 @@ class Recipe:
             "steps": self.procedure,
             "portions": self.portions
         }
+    
+    def updateDBCollection(self):
+        return {
+            "ingredients": self.ingredients,
+            "steps": self.procedure,
+            "portions": self.portions
+        }

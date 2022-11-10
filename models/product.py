@@ -16,3 +16,11 @@ class Product:
             "image": self.image,
             "recipe": self.recipe
         }
+    
+    def updateDBCollection(self):
+        return {
+            "name": self.name,
+            "description": self.description,
+            "price": self.price,
+            "image": self.image
+        }

@@ -106,43 +106,28 @@ def products():
 @app.route('/add-product', methods=['GET', 'POST'])
 def add_product():
     if request.method == 'POST':
-        ingredients = []
         products = db['products']
         recipes = db['recipes']
-        for quantity, unit, ingredient in zip(request.form.getlist('quantity'), request.form.getlist('unit'), request.form.getlist('ingredient')):
-            ingredients.append({
-                "quantity": quantity,
-                "unit": unit,
-                "name": ingredient
-            })
-
-        id_recipe = get_id(recipes)
-        id_product = get_id(products)
-
-        steps = request.form['procedure'].split()
-
-        recipe = Recipe(id_recipe, ingredients, steps, request.form['portions'])
-        recipes.insert_one(recipe.toDBCollection())
-
-        file = request.files['image']
-        filename = str(id_product) + '.jpg'
-        img_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-        file.save(img_path)
-
-        product = Product(id_product, request.form['name'], request.form['description'], request.form['price'], img_path, id_recipe)
+        product, recipe = set_product(request)
         products.insert_one(product.toDBCollection())
+        recipes.insert_one(recipe.toDBCollection())
         return render_template('add-product.html', admin=is_admin(), error='Producto agregado correctamente :^)')
     return render_template('add-product.html', admin=is_admin())        
 
-@app.route('/update-product/<int:id_product>')
+@app.route('/update-product/<int:id_product>', methods=['GET', 'POST'])
 def update_product(id_product):
     products = db['products']
     product = products.find_one({'_id': id_product})
-    recipe = db['recipes'].find_one({'_id': product['recipe']})
+    id_recipe = product['recipe']
+    recipe = db['recipes'].find_one({'_id': id_recipe})
     recipe['steps'] = '\n'.join(recipe['steps'])
-    print(product)
     if request.method == 'POST':
-        return render_template('update-product.html', admin=is_admin(), product=product, recipe=recipe)
+        product, recipe = set_product(request)
+        print(product.toDBCollection())
+        print(recipe.toDBCollection())
+        products.update_one({'_id': id_product}, {'$set': product.updateDBCollection()})
+        db['recipes'].update_one({'_id': id_recipe}, {'$set': recipe.updateDBCollection()})
+        return render_template('update-product.html', admin=is_admin(), product=product, recipe=recipe, error='Producto actualizado correctamente :^)')
     return render_template('update-product.html', admin=is_admin(), product=product, recipe=recipe)
 
 @app.route('/delete-product/<int:id_product>')
@@ -261,6 +246,36 @@ def get_id(collection):
     if collection.count_documents({}) == 0:
         return 0
     return collection.find().sort('_id', -1).limit(1)[0]['_id'] + 1
+
+def set_product(request):
+    products = db['products']
+    recipes = db['recipes']
+    ingredients = []
+    for quantity, unit, ingredient in zip(request.form.getlist('quantity'), request.form.getlist('unit'), request.form.getlist('ingredient')):
+        ingredients.append({
+            "quantity": quantity,
+            "unit": unit,
+            "name": ingredient
+        })
+
+    
+    id_product = get_id(products)
+    id_recipe = get_id(recipes)
+
+    steps = request.form['procedure'].split()
+
+    recipe = Recipe(id_recipe, ingredients, steps, request.form['portions'])
+
+    filename = str(id_product) + '.jpg'
+    img_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+
+    if request.files['image'].filename != '':
+        file = request.files['image']
+        file.save(img_path)
+
+    product = Product(id_product, request.form['name'], request.form['description'], request.form['price'], img_path, id_recipe)
+
+    return [product, recipe]
 
 if __name__ == '__main__':
     app.run(debug=True, port=4000)
