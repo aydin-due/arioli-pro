@@ -108,17 +108,23 @@ def update_account():
     else:
         return render_template('update-account.html', admin=is_admin(), user=user)
 
+
 # PRODUCT
 
 @app.route('/products', methods=["GET", "POST"])
 def products():
     error = request.args.get('error')
-    products = db['products'].find()
+    products = list(db['products'].find())
+    if request.method == 'POST':
+        products = list(db['products'].find({"name": {'$regex' : request.form['product']}}))
+    print(products)
+    if not products:
+        error = 'No se encontraron productos ;('
     if is_admin():
         return render_template('products-admin.html', admin=is_admin(), products=products, error=error)
     if 'username' in session:
         return render_template('products.html', admin=is_admin(), products=products, error=error, user=session['username'])
-    return render_template('products.html', admin=is_admin(), products=products)
+    return render_template('products.html', admin=is_admin(), products=products, error=error)
 
 @app.route('/add-product', methods=['GET', 'POST'])
 def add_product():
@@ -233,6 +239,8 @@ def remove_from_cart(id_product):
         users.update_one({"email": session['email']}, {"$unset": {"cart": ""}})
     carts.update_one({"_id": id_cart}, {"$set": {"products": cart['products'], "total": cart_total}})
     return redirect(url_for('cart', error='Producto eliminado del carrito ;('))
+
+
 # ORDER
 
 @app.route('/orders')
@@ -247,7 +255,6 @@ def orders():
             orders.reverse()
             for order in orders:
                 order['client'] = users.find_one({"orders": order['_id']})
-            print(orders)
             return render_template('orders-admin.html', admin=is_admin(), user=user, orders=orders)
         if 'orders' not in user:
             return render_template('orders.html', admin=is_admin(), user=user, error='No tiene ninguna orden :(')
