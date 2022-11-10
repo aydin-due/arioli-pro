@@ -181,7 +181,7 @@ def recipe(id_product):
 
 # CART
 
-@app.route('/cart')
+@app.route('/cart', methods=['GET', 'POST'])
 def cart():
     if 'username' in session:
         users = db['users']
@@ -189,6 +189,14 @@ def cart():
         if 'cart' in user:
             carts = db['carts']
             cart = carts.find_one({"_id": user['cart']})
+            if request.method == 'POST':
+                quantities = request.form.getlist('quantity')
+                for i in range(len(cart['products'])):
+                    cart['products'][i]['quantity'] = quantities[i]
+                    cart['products'][i]['unit_total'] = int(cart['products'][i]['price']) * int(quantities[i])
+                    cart['total'] = sum([int(product['unit_total']) for product in cart['products']])
+                    carts.update_one({'_id': user['cart']}, {'$set': cart})
+                    return redirect(url_for('make_order', id_cart=user['cart']))
             return render_template('cart.html', cart=cart, admin=is_admin(), user=user)
         else:
             return render_template('cart.html', admin=is_admin(), user=user, error='Su carrito de compras está vacío ;(')
