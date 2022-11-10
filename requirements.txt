@@ -1,6 +1,6 @@
 certifi==2022.9.24
 click==8.0.4
-dataclasses==0.8
+dataclasses==0.6
 dnspython==2.2.1
 Flask==2.0.3
 importlib-metadata==4.8.3
