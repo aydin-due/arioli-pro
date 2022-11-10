@@ -305,6 +305,11 @@ def delivered_order(id_order):
         orders.update_one({"_id": id_order}, {"$set": {"delivered": True}})
     return redirect(url_for('orders'))
 
+@app.route('/cancel-order/<int:id_order>')
+def cancel_order(id_order):
+    orders = db['orders']
+    orders.update_one({"_id": id_order}, {"$set": {"canceled": True}})
+    return redirect(url_for('orders', error='Orden cancelada correctamente :^)'))
 
 # UTILS
 

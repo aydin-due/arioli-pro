@@ -40,9 +40,15 @@
                 <div class="col d-xl-flex justify-content-xl-center align-items-xl-center">
                     <p style="color: var(--bs-body-color);"><strong>Contacto: </strong>{{order.client.phone}}</p>
                 </div>
+                {% if order.canceled%}
+                <div class="col d-xl-flex justify-content-xl-end align-items-xl-end">
+                    <p style="color: var(--bs-body-color);text-align: end;"><strong>Cancelado</strong></p>
+                </div>
+                {% else %}
                 <div class="col d-xl-flex justify-content-xl-end">
                     <a class="btn btn-primary shadow" role="button" href="{{url_for('delivered_order', id_order=order._id)}}" style="border-style: none;background: var(--bs-body-color);font-family: 'Be Vietnam Pro', sans-serif;">{% if not order.delivered %} Realizar entrega {% else %} Deshacer entrega {% endif %}</a>
                 </div>
+                {% endif %}
             </div>
         </div>
     </div>

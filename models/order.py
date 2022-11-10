@@ -4,6 +4,7 @@ class Order:
         self.products = products
         self.total = total
         self.date = date
+        self.canceled = False
         self.delivered = False
     
     def toDBCollection(self):
@@ -12,5 +13,6 @@ class Order:
             "products": self.products,
             "total": self.total,
             "date": self.date,
+            "canceled": self.canceled,
             "delivered": self.delivered
         }
