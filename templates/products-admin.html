@@ -12,10 +12,16 @@
             <p style="width: 600px;">Puedes navegar nuestra colección de muffins, brownies y galletas veganas, o también puedes realizar una búsqueda de tu producto preferido.</p>
         </div>
     </div>
-    <div class="row mb-4 mb-lg-5" style="text-align: center;">
-        <div class="col-lg-6 col-xl-7 d-lg-flex d-xl-flex justify-content-lg-end justify-content-xl-end"><input class="placeholder border rounded border-1 d-lg-flex justify-content-lg-start align-items-lg-center" type="search" style="background: var(--bs-white);width: 300px;padding: 10px;" placeholder="Nombre del producto"></div>
-        <div class="col d-lg-flex d-xl-flex justify-content-lg-start justify-content-xl-start"><a class="btn btn-primary shadow" role="button" href="signup.html" style="border-style: none;background: var(--bs-body-color);font-family: 'Be Vietnam Pro', sans-serif;">Buscar</a></div>
-    </div>
+    <form method="POST">
+        <div class="row mb-4 mb-lg-5" style="text-align: center;">
+            <div class="col-lg-6 col-xl-7 d-lg-flex d-xl-flex justify-content-lg-end justify-content-xl-end">
+                <input class="placeholder border rounded border-1 d-lg-flex justify-content-lg-start align-items-lg-center" name="search" type="text" style="background: var(--bs-white);width: 300px;padding: 10px;" placeholder="Nombre del producto">
+            </div>
+            <div class="col d-lg-flex d-xl-flex justify-content-lg-start justify-content-xl-start">
+                <button class="btn btn-primary shadow" type="submit" style="border-style: none;background: var(--bs-body-color);font-family: 'Be Vietnam Pro', sans-serif;">Buscar</button>
+            </div>
+        </div>
+    </form>
     <div class="row mb-4 mb-lg-5" style="text-align: center;">
         <div class="col d-lg-flex d-xl-flex justify-content-lg-start justify-content-xl-center"><a class="btn btn-primary shadow" role="button" href="/add-product" style="border-style: none;background: var(--bs-body-color);font-family: 'Be Vietnam Pro', sans-serif;">Agregar productos</a></div>
     </div>

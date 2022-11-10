@@ -116,7 +116,7 @@ def products():
     error = request.args.get('error')
     products = list(db['products'].find())
     if request.method == 'POST':
-        products = list(db['products'].find({"name": {'$regex' : request.form['product']}}))
+        products = list(db['products'].find({"name": {'$regex' : request.form['search'], '$options' : 'i'}}))
     print(products)
     if not products:
         error = 'No se encontraron productos ;('
