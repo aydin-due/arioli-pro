@@ -244,6 +244,7 @@ def orders():
         if user['admin']:
             orders = db['orders']
             orders = list(orders.find())
+            orders.reverse()
             for order in orders:
                 order['client'] = users.find_one({"orders": order['_id']})
             print(orders)
