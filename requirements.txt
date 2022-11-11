@@ -1,8 +1,9 @@
 certifi==2022.9.24
 click==8.0.4
-dataclasses==0.6
+dataclasses==0.8
 dnspython==2.2.1
 Flask==2.0.3
+Flask-PyMongo==2.3.0
 importlib-metadata==4.8.3
 itsdangerous==2.0.1
 Jinja2==3.0.3
@@ -11,4 +12,3 @@ pymongo==4.1.1
 typing_extensions==4.1.1
 Werkzeug==2.0.3
 zipp==3.6.0
-gunicorn==20.0.4

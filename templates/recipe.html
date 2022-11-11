@@ -20,7 +20,7 @@
                 </div>
             </div>
             <div class="col-md-8 col-xl-6 text-center mx-auto">
-                <img src="../{{product.image}}" width="100" style="border-radius: 50%;width: 150px;height: 150px;">
+                <img src="{{url_for('image', filename=product.image)}}" width="100" style="border-radius: 50%;width: 150px;height: 150px;">
             </div>
         </div>
     </div>

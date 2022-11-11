@@ -67,7 +67,7 @@
                         {% for product in order.products %}
                         <tr id="product-container">
                             <td class="d-lg-flex d-xl-flex align-items-lg-center align-items-xl-center">
-                                <div class="col-lg-2 col-xl-3"><img src="{{product.image}}" width="100" style="border-radius: 10%;width: 80px;height: 80px;"></div>
+                                <div class="col-lg-2 col-xl-3"><img src="{{url_for('image', filename=product.image)}}" width="100" style="border-radius: 10%;width: 80px;height: 80px;"></div>
                                 <div class="col-lg-7 col-xl-8">
                                     <p>{{product.name}}</p>
                                     <h6 class="text-muted mb-2">{{ product.description }}</h6>

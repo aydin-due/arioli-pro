@@ -1,6 +1,9 @@
+# coding=utf-8
+
 import os
-from flask import Flask, render_template, request, Response, jsonify, url_for, redirect, session
+from flask import Flask, render_template, request, Response, jsonify, send_file, url_for, redirect, session
 import database as db
+import gridfs
 import secrets
 import datetime
 from models.user import User
@@ -13,7 +16,6 @@ db = db.dbConnection()
 app = Flask(__name__)
 app.secret_key = secrets.token_hex(16)
 app.config['UPLOAD_FOLDER'] = 'static/img/products'
-
 
 # INDEX
 
@@ -117,7 +119,6 @@ def products():
     products = list(db['products'].find())
     if request.method == 'POST':
         products = list(db['products'].find({"name": {'$regex' : request.form['search'], '$options' : 'i'}}))
-    print(products)
     if not products:
         error = 'No se encontraron productos ;('
     if is_admin():
@@ -344,12 +345,21 @@ def set_product(request, *args, **kwargs):
     recipe = Recipe(id_recipe, ingredients, steps, request.form['portions'])
 
     filename = str(id_product) + '.jpg'
-    img_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
 
     if request.files['image'].filename != '':
-        file = request.files['image']
-        file.save(img_path)
-
-    product = Product(id_product, request.form['name'], request.form['description'], request.form['price'], img_path, id_recipe)
+        image = request.files['image'].read()
+        fs = gridfs.GridFS(db)
+        fs.put(image, filename=filename)
+        
+    product = Product(id_product, request.form['name'], request.form['description'], request.form['price'], filename, id_recipe)
 
     return [product, recipe]
+
+@app.route('/image/<filename>')
+def image(filename):
+    fs = gridfs.GridFS(db)
+    image = fs.get_last_version(filename=filename)
+    return send_file(image, mimetype='image/jpg')
+
+if __name__ == '__main__':
+    app.run(port=4000)
