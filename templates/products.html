@@ -22,17 +22,17 @@
                 </div>
             </div>
         </form>
-        <div class="row mb-4 mb-lg-5" style="text-align: center;">
-            {% if error %}
+        {% if error %}
+        <div class="row mb-4 mb-lg-5" style="text-align: center;margin-top: 100px;">
             <div class="mb-3">
                 <p class="fw-bold text-success mb-2", style="color: #c1292e !important;font-family: 'Be Vietnam Pro', sans-serif;"">{{ error }}</p>
             </div>
-            {% endif %}
         </div>
+            {% endif %}
     </div>
     <div class="container d-xl-flex justify-content-evenly flex-wrap align-items-xl-center">
         {% for product in products %}
-        <div class="card" style="width: 350px;margin-bottom: 100px;">
+        <div class="card" style="width: 350px;margin-bottom: 80px;">
             <div class="card-body" style="padding-top: 100px;"><img class="d-lg-flex" style="border-radius: 50%;width: 150px;height: 150px;box-shadow: 0px 10px 20px 4px var(--bs-gray-500);position: absolute;top: -50px;left: 50%;-webkit-transform: translateX(-50%);transform: translateX(-50%);" src="{{url_for('image', filename=product.image)}}">
                 <h4 class="card-title" style="font-family: Amaranth, sans-serif;text-align: center;padding-top: 30px;">{{product.name}}</h4>
                 <p class="card-text">{{product.description}}</p>
@@ -42,7 +42,7 @@
                     </div>
                     <div class="col d-xl-flex justify-content-xl-end">
                         {% if user %}
-                        <a class="btn btn-primary d-xl-flex" href="{{url_for('add_to_cart', id_product=product._id)}}" style="border-style: none;background: var(--bs-secondary);font-family: 'Be Vietnam Pro', sans-serif;">Agregar al carrito</a>
+                        <a class="btn btn-primary d-xl-flex" href="{{url_for('add_to_cart', id_product=product._id)}}" style="border-style: none;background: var(--bs-orange);font-family: 'Be Vietnam Pro', sans-serif;">Agregar al carrito</a>
                         {% endif %}
                     </div>
                 </div>

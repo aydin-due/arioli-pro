@@ -14,7 +14,7 @@ from models.order import Order
 
 db = db.dbConnection()
 app = Flask(__name__)
-app.secret_key = secrets.token_hex(16)
+app.secret_key = '219466d271c2f7cf88fcd8b24917c23f'
 app.config['UPLOAD_FOLDER'] = 'static/img/products'
 
 # INDEX
@@ -160,8 +160,8 @@ def delete_product(id_product):
     product = products.find_one({'_id': id_product})
     if product:
         products.delete_one({'_id': id_product})
-        return redirect(url_for('products_admin', error='Producto eliminado correctamente :^)'))
-    return redirect(url_for('products_admin', error='El producto no existe'))
+        return redirect(url_for('products', error='Producto eliminado correctamente :^)'))
+    return redirect(url_for('products', error='El producto no existe'))
 
 
 # RECIPE

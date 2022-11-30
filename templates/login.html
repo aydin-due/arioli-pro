@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% set admin = admin %}
 
-{% block title %}Inicio{% endblock %}
+{% block title %}Inicia sesión{% endblock %}
 
 {% block content %}
     <section class="py-5" style="--bs-primary: rgb(255,173,5);--bs-primary-rgb: 255,173,5;--bs-secondary: rgb(91,140,23);--bs-secondary-rgb: 91,140,23;--bs-light: #f5f6f8;--bs-light-rgb: 245,246,248;--bs-dark: rgb(116,117,114);--bs-dark-rgb: 116,117,114;--bs-body-color: rgb(33,2,3);--bs-body-bg: #fff;background: var(--bs-light);">
@@ -25,6 +25,11 @@
                                 <div class="mb-3">
                                     <button class="btn btn-primary shadow d-block w-100" type="submit" style="background: var(--bs-secondary);border-style: none;font-family: 'Be Vietnam Pro', sans-serif;">Iniciar sesión</button>
                                 </div>
+                                {% if error %}
+                                <div class="mb-3">
+                                    <p class="fw-bold text-success mb-2", style="color: #c1292e !important;font-family: 'Be Vietnam Pro', sans-serif;"">{{ error }}</p>
+                                </div>
+                                {% endif %}
                             </form>
                         </div>
                     </div>
