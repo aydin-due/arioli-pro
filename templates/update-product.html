@@ -24,7 +24,7 @@
                                 <h4 style="font-family: Amaranth, sans-serif;margin-bottom: 20px;">Inserta los ingredientes</h4>
                                 {% for ingredient in recipe.ingredients %}
                                 <div class="d-xl-flex justify-content-sm-between justify-content-xl-around align-items-xl-start" id="ingredient" style="margin: 1px;margin-left: 50px;width: 500px;">
-                                    <input class="form-control" value="{{ ingredient.quantity }}" type="number" placeholder="Cantidad" style="width: 140px;" name="quantity" min="1" required>
+                                    <input class="form-control" value="{{ ingredient.quantity }}" type="number" placeholder="Cantidad" style="width: 140px;" name="quantity" min="0.1" step="0.01" required>
                                     <input class="form-control" value="{{ ingredient.unit }}" type="text" name="unit" placeholder="Medida" style="margin-bottom: 30px;font-family: 'Be Vietnam Pro', sans-serif;width: 110px;" required>
                                     <input class="form-control" value="{{ ingredient.name }}" type="text" name="ingredient" placeholder="Ingrediente" style="margin-bottom: 30px;font-family: 'Be Vietnam Pro', sans-serif;width: 200px;" required>
                                     <svg xmlns="http://www.w3.org/2000/svg" id="delete" style="margin-top:15px;" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-x-circle-fill text-danger">

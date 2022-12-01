@@ -99,6 +99,9 @@ def update_account():
         phone = request.form['phone']
         password = request.form['password']
 
+        if users.find_one({'email': email, '_id': {"$ne": user['_id']}}):
+            return render_template('update-account.html', error='El correo ya está en uso', restaurant=is_admin(), user=user)
+
         if username and email and password and phone:
             user = User(username, email, password, phone)
             users.update_one({'email': session['email']}, {'$set': user.toBDCollection()})
@@ -175,7 +178,7 @@ def recipe(id_product):
     if request.method == 'POST':
         portions = request.form['portions']
         for ingredient in recipe['ingredients']:
-            ingredient['quantity'] = float(ingredient['quantity']) * float(portions) / float(recipe['portions'])
+            ingredient['quantity'] = round(float(ingredient['quantity']) * float(portions) / float(recipe['portions']), 2)
         return render_template('recipe.html', admin=is_admin(), product=product, recipe=recipe, portions=portions)
     return render_template('recipe.html', admin=is_admin(), product=product, recipe=recipe, portions=recipe['portions'])
 
@@ -273,6 +276,8 @@ def orders():
             order = orders.find_one({"_id": id_order})
             orders_list.append(order)
         orders_list.reverse()
+        print('AAAA')
+        print(orders_list)
         return render_template('orders.html', orders=orders_list, admin=is_admin(), user=user, error=error)
     return render_template('orders.html', admin=is_admin(), error="Inicie sesión para ver su historial de órdenes, o cree una cuenta si no tiene una :^)")
 
@@ -340,7 +345,7 @@ def set_product(request, *args, **kwargs):
     else:
         id_recipe = get_id(recipes)
 
-    steps = request.form['procedure'].split()
+    steps = request.form['procedure'].split('\n')
 
     recipe = Recipe(id_recipe, ingredients, steps, request.form['portions'])
 
